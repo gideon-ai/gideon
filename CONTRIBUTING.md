@@ -12,12 +12,12 @@ The following is a set of guidelines for contributing to Gideon, which is runnin
 
 [What should I know before I get started?](#what-should-i-know-before-i-get-started)
   * [What exactly is Gideon?](#what-exactly-is-gideon)
-  * [What is the vision?](#gideon-vision)
+  * [What is the vision?](#what-is-the-vision)
 
 [How Can I Contribute?](#how-can-i-contribute)
-  * [Reporting Bugs](#reporting-bugs)
+  * [Search Queries](#search-queries)
   * [Suggesting Enhancements](#suggesting-enhancements)
-  * [Your First Code Contribution](#your-first-code-contribution)
+  * [Your First Contribution](#your-first-contribution)
   * [Pull Requests](#pull-requests)
 
 ## Code of Conduct
@@ -30,6 +30,24 @@ This project and everyone participating in it is governed by the [Gideon Code of
 
 ### What exactly is Gideon?
 
-Gideon is an autonomous code recommendation engine that converts English speech to popular coding patterns. 
+Gideon is an autonomous code recommendation engine that converts English speech to popular ML coding patterns. 
+
+### What is the vision?
+
+Gideon's vision is to let people turn ideas into enterprise-grade products using the best coding practices. 
+
+## How Can I Contribute?
+
+### Search Queries
+
+What kind of ML functionality do you want to build? Is it building a Transformer model? Is it visualizing a continuous variable?
+
+Submit your search queries and Gideon will learn the coding pattern necessary to answer your query
+
+### Contribute Coding Patterns
+
+Do you have a popular coding pattern that solves some of the most common needs of a Data Scientist? You can share the coding pattern and it will help Gideon answer some of the most popular problems faced by a Data Scientist
+
+### Your First Contribution
 
 
