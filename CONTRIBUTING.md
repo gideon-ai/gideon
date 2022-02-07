@@ -26,4 +26,10 @@ This project and everyone participating in it is governed by the [Gideon Code of
 
 ## I don't want to read this whole thing I just have a question!!!
 
+## What should I know before I get started?
+
+### What exactly is Gideon?
+
+Gideon is an autonomous code recommendation engine that converts English speech to popular coding patterns. 
+
 
