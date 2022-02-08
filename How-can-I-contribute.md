@@ -15,7 +15,7 @@ The following is a set of guidelines for contributing to Gideon, which is runnin
   * [What is the vision?](#what-is-the-vision)
 
 [How Can I Contribute?](#how-can-i-contribute)
-  * [Search Queries](#search-queries)
+  * [Conversations with Gideon](#conversations-with-gideon)
   * [Suggesting Enhancements](#suggesting-enhancements)
   * [Your First Contribution](#your-first-contribution)
   * [Pull Requests](#pull-requests)
@@ -26,6 +26,9 @@ This project and everyone participating in it is governed by the [Gideon Code of
 
 ## I don't want to read this whole thing I just have a question!!!
 
+Best place to start a conversation would be https://github.com/gideon-ai/gideon/discussions
+
+
 ## What should I know before I get started?
 
 ### What exactly is Gideon?
@@ -34,11 +37,13 @@ Gideon is an autonomous code recommendation engine that converts English speech 
 
 ### What is the vision?
 
-Gideon's vision is to let people turn ideas into enterprise-grade products using the best coding practices. 
+Gideon's vision is to be a coding assistant that lets people turn ideas into enterprise-grade products using the best coding practices. 
 
 ## How Can I Contribute?
 
-### Search Queries
+### Conversations with Gideon
+
+Imagine you are speaking with a coding assitant that can help you build anything you want. How are you going to start the conversation?
 
 What kind of ML functionality do you want to build? Is it building a Transformer model? Is it visualizing a continuous variable?
 
