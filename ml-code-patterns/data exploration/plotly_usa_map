@@ -1,0 +1,5 @@
+import plotly.graph_objs as go
+data = [go.Scattergeo(lon=df['Longitude'], lat=df['Latitude'], text=df['City_Name'], name='',marker=dict(size=df['Profits'],color='Green'))]
+layout = go.Layout(title=go.layout.Title(text='(Title)'), showlegend=False, geo=dict(scope='usa', projection=go.layout.geo.Projection(type='albers usa'), showlakes=True,lakecolor='rgb(255, 255, 255)'))
+fig = go.Figure(data=data, layout=layout)
+fig.show()

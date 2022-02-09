@@ -1,0 +1,3 @@
+import pandas_profiling
+profile = df.profile_report(title="Data Visualization Report", progress_bar=False, minimal=False)
+profile.to_file(output_file="exploratory_analysis.html")
