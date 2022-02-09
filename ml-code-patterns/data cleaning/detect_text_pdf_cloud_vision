@@ -1,3 +1,10 @@
+Conversation:
+
+User: "How to detect text in a pdf?"
+User: "I wish to extract text from pdf using OCR."
+
+Gideon: "Here is how you can do it via Google Cloud Vision API."
+
 from google.cloud import vision
 from google.cloud import storage
 import os
