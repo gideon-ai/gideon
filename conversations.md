@@ -3,4 +3,4 @@
 Conversation 1:
 
 User: "How can I perform Customer Segmentation?"
-Gideon: Here is a coding pattern that can help you: [Build a K-Means Clustering model](ml-code-patterns/model-training/customer_segmentation_plotly)
+Gideon: Here is a coding pattern that can help you: [Build a K-Means Clustering model](ml-code-patterns/model%20training/customer_segmentation_plotly)
