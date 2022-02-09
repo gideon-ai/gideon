@@ -1,0 +1,38 @@
+Step 1: Instantiate a tokenizer and a model from the checkpoint name. The model is identified as a BERT model and loads it with the weights stored in the checkpoint.
+
+Step 2: Build a sequence from the two sentences, with the correct model-specific separators, token type ids and attention masks (which will be created automatically by the tokenizer).
+
+Step 3: Pass this sequence through the model so that it is classified in one of the two available classes: 0 (not a paraphrase) and 1 (is a paraphrase).
+
+Step 4: Compute the softmax of the result to get probabilities over the classes.
+
+from transformers import AutoTokenizer, TFAutoModelForSequenceClassification
+import tensorflow as tf
+
+tokenizer = AutoTokenizer.from_pretrained("bert-base-cased-finetuned-mrpc")
+model = TFAutoModelForSequenceClassification.from_pretrained("bert-base-cased-finetuned-mrpc")
+
+classes = ["not paraphrase", "is paraphrase"]
+
+sequence_0 = "The company HuggingFace is based in New York City"
+sequence_1 = "Apples are especially bad for your health"
+sequence_2 = "HuggingFace's headquarters are situated in Manhattan"
+
+# The tokenizer will automatically add any model specific separators (i.e. <CLS> and <SEP>) and tokens to
+# the sequence, as well as compute the attention masks.
+paraphrase = tokenizer(sequence_0, sequence_2, return_tensors="tf")
+not_paraphrase = tokenizer(sequence_0, sequence_1, return_tensors="tf")
+
+paraphrase_classification_logits = model(paraphrase).logits
+not_paraphrase_classification_logits = model(not_paraphrase).logits
+
+paraphrase_results = tf.nn.softmax(paraphrase_classification_logits, axis=1).numpy()[0]
+not_paraphrase_results = tf.nn.softmax(not_paraphrase_classification_logits, axis=1).numpy()[0]
+
+# Should be paraphrase
+for i in range(len(classes)):
+    print(f"{classes[i]}: {int(round(paraphrase_results[i] * 100))}%")
+
+# Should not be paraphrase
+for i in range(len(classes)):
+    print(f"{classes[i]}: {int(round(not_paraphrase_results[i] * 100))}%")

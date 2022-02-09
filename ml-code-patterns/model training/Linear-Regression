@@ -1,0 +1,16 @@
+from sklearn.model_selection import train_test_split
+from sklearn.linear_model import LinearRegression
+from sklearn import metrics
+
+feature_cols = ['Col1_name','Col2_name']
+X = df[feature_cols]
+y = df.target     #target is the name of the output column
+X_train, X_test, y_train, y_test = train_test_split(X, y, random_state=123)
+linreg = LinearRegression()
+linreg.fit(X_train, y_train)
+y_pred = linreg.predict(X_test)
+
+print (linreg.intercept_)
+print (linreg.coef_)
+rmse_model = np.sqrt(metrics.mean_squared_error(y_test, y_pred))
+mae_model = metrics.mean_absolute_error(y_test, y_pred))

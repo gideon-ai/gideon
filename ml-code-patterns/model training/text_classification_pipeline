@@ -1,0 +1,24 @@
+import pandas as pd
+from sklearn.feature_extraction.text import CountVectorizer,TfidfTransformer
+from sklearn.pipeline import Pipeline
+
+from sklearn.model_selection import train_test_split
+df = pd.read_csv("reviews.csv")
+X = df['review'] # the features we want to analyze
+ylabels = df['output'] # the labels, or answers, we want to test against
+
+X_train, X_test, y_train, y_test = train_test_split(X, ylabels, test_size=0.3)
+
+#Here is the pipeline we are going to implement : CountVectorizer -> TFIDF -> Decision Tree
+
+from sklearn.tree import DecisionTreeClassifier
+classifier=DecisionTreeClassifier(class_weight='balanced')
+pipeline = Pipeline([
+    ('vect', CountVectorizer()),
+    ('tfidf', TfidfTransformer()),
+    ('clf', classifier),
+])
+
+pipeline.fit(X_train,y_train)
+pipeline.score(X_test,y_test)
+

@@ -1,0 +1,18 @@
+from sklearn.neighbors import KNeighborsClassifier
+from sklearn.cross_validation import cross_val_score
+
+predictor_cols = ['Col1','Col2','Col3']
+predictors = df[predictor_cols].values
+labels = df["Result"].values
+
+# Defining The parameters in KNN Classifier
+clf_knn = KNeighborsClassifier(
+    n_neighbors=10,
+    weights='distance'
+    )
+clf_knn = clf_knn.fit(predictors,labels)
+
+# Computing the Cross validation score with 5-fold cross validation
+score_knn = cross_val_score(clf_knn, predictors, labels, cv=5)
+print("Cross Validation score : " + str(score_knn))
+print("Cross Validation Mean score : " + str(score_knn.mean()))

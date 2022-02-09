@@ -1,0 +1,31 @@
+from google.cloud import vision
+from google.cloud import storage
+import os
+os.environ["GOOGLE_APPLICATION_CREDENTIALS"]="phantomdrive100.json"
+
+def localize_objects_uri(uri):
+    """Localize objects in the image on Google Cloud Storage
+
+    Args:
+    uri: The path to the file in Google Cloud Storage (gs://...)
+    """
+    
+    client = vision.ImageAnnotatorClient()
+
+    image = vision.Image()
+    image.source.image_uri = uri
+
+    objects = client.object_localization(
+        image=image).localized_object_annotations
+
+    print('Number of objects found: {}'.format(len(objects)))
+    object_list=[]
+    for object_ in objects:
+        object_list.append(object_.name)
+        print('\n{} (confidence: {})'.format(object_.name, object_.score))
+        print('Normalized bounding polygon vertices: ')
+        for vertex in object_.bounding_poly.normalized_vertices:
+            print(' - ({}, {})'.format(vertex.x, vertex.y))
+    return object_list
+    
+    localize_objects_uri('gs://cloudstorage/healthy_food.jpg')

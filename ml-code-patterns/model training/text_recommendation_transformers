@@ -1,0 +1,69 @@
+import pandas as pd
+from sklearn.metrics.pairwise import cosine_similarity
+from sklearn.metrics.pairwise import euclidean_distances
+import numpy as np
+
+#Prepare the data
+df_content = pd.read_csv('articles.csv')
+df = df_content[['Topics','Summary','Content','Links']]   #Choose the relevant columns. 
+
+#Generate the sentence vectors for the article content
+from sentence_transformers import SentenceTransformer
+sbert_model = SentenceTransformer('bert-base-nli-mean-tokens')
+document_embeddings = sbert_model.encode(df['Content'])
+
+#Calculate the cosine similarities based on these sentence vectors
+pairwise_similarities=cosine_similarity(document_embeddings)
+
+#Now identify the 3 articles that are most similar to the original article
+def most_similar(doc_id,similarity_matrix,matrix):
+    info = []
+    print (f'Document: {df.iloc[doc_id]["Content"]}')
+    print ('\n')
+    print ('Similar Documents:')
+    if matrix=='Cosine Similarity':
+        similar_ix=np.argsort(similarity_matrix[doc_id])[::-1]
+    elif matrix=='Euclidean Distance':
+        similar_ix=np.argsort(similarity_matrix[doc_id])
+    for ix in similar_ix[:4]:
+        if ix==doc_id:
+            continue
+        print('\n')
+        print (f'Document: {df.iloc[ix]["Topics"]}')
+        print (f'Url: {df.iloc[ix]["Links"]}') 
+        topic = df.iloc[ix]["Topics"]
+        link = df.iloc[ix]["Links"]
+        info.append([topic,link])
+        print (f'{matrix} : {similarity_matrix[doc_id][ix]}')
+    return info
+
+#Store the recommendations in a DataFrame
+recom = {}
+for i in range(len(df)):
+    reco = most_similar(i,pairwise_similarities,'Cosine Similarity')
+    recom[i] = reco
+
+df_recommendations = pd.DataFrame.from_dict(recom,orient='index')
+
+df_recommendations.columns = ['Recommendation1','Recommendation2','Recommendation3']
+
+df_recommendations['Recomendation1_topic'] = df_recommendations["Recommendation1"].apply(lambda x: x[0])
+
+df_recommendations['Recommendation1_url'] = df_recommendations["Recommendation1"].apply(lambda x: x[1])
+
+df_recommendations['Recommendation2_topic'] = df_recommendations["Recommendation2"].apply(lambda x: x[0])
+
+df_recommendations['Recommendation2_url'] = df_recommendations["Recommendation2"].apply(lambda x: x[1])
+
+
+df_recommendations['Recommendation3_topic'] = df_recommendations["Recommendation3"].apply(lambda x: x[0])
+
+df_recommendations['Recommendation3_url'] = df_recommendations["Recommendation3"].apply(lambda x: x[1])
+
+
+df_recommendations
+
+
+df_final = pd.concat([df,df_recommendations],1)  #Concat the recommended results with the original article's details present in the original Dataframe
+
+df_final.head(3)

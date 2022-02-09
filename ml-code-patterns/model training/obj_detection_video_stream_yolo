@@ -1,0 +1,23 @@
+#Install Tensorflow
+pip3 install tensorflow==2.4.0
+#Install other dependencies
+pip install keras==2.4.3 numpy==1.19.3 pillow==7.0.0 scipy==1.4.1 h5py==2.10.0 matplotlib==3.3.2 opencv-python keras-resnet==0.2.0
+#Install ImageAI
+pip install imageai --upgrade
+#Download the yolo model at https://github.com/OlafenwaMoses/ImageAI/releases/download/1.0/yolo.h5 and keep it in the same directory as the python file
+
+from imageai.Detection import VideoObjectDetection
+import os
+import warnings
+warnings.filterwarnings('ignore')
+execution_path = os.getcwd()
+
+detector = VideoObjectDetection()
+detector.setModelTypeAsYOLOv3()
+detector.setModelPath( os.path.join(execution_path , "yolo.h5"))
+detector.loadModel()
+#retail_store is the name of the source video and retail_store_45 is the name of the destination video with objects identified
+video_path = detector.detectObjectsFromVideo(input_file_path=os.path.join( execution_path, "retail_store.mp4"),
+                                output_file_path=os.path.join(execution_path, "retail_store_45")
+                                , frames_per_second=29, log_progress=True)
+print(video_path)
