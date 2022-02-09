@@ -1,3 +1,8 @@
+Conversation:
+
+User: "How can I assign value to a particular row and column position in dataframe?"
+Gideon: Below is the code recommendation for your ask!
+
 import pandas as pd
 
 df = pd.DataFrame(index=['A','B','C'], columns=['x','y'])
