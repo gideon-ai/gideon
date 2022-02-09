@@ -1,0 +1,13 @@
+string1 = 'Special $#! characters   spaces 888323'
+string2 = 'how much for the maple syrup? $20.99? That s ricidulous!!!'
+
+#Approach 1
+clean_string = '.join(e for e in string if e.isalnum())
+
+#Approach 2
+import re
+clean_string = re.sub('[^A-Za-z0-9]+', '', string)
+
+#Approach 3
+import re
+clean_string = re.sub('\W+','', string)

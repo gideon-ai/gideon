@@ -1,0 +1,2 @@
+#Col1 contains values like 127 kgs, 890 kgs etc
+df['Col1'] = df['Col1'].astype(str).str.replace(' kgs','').astype(int)

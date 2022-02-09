@@ -1,0 +1,16 @@
+import pandas as pd
+
+df = pd.DataFrame(index=['A','B','C'], columns=['x','y'])
+Output:
+    x    y
+A  NaN  NaN
+B  NaN  NaN
+C  NaN  NaN
+
+df.at['C', 'x'] = 10
+Output:
+    x	 y
+A	NaN	NaN
+B	NaN	NaN
+C	10	NaN
+

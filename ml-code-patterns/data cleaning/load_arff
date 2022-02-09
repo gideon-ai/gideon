@@ -1,0 +1,8 @@
+from scipy.io.arff import loadarff
+phishing_data_raw = loadarff("PhishingData.arff")
+
+# Selection of the Data and converting data into numpy format for flexibility in cleaning
+phising_data_array = np.array(phishing_data_raw[0])
+
+# Converting the numpy array into Pandas data frame  and casting the coloumns to numeric type
+phising_data_frame = pd.DataFrame(phising_data_array).apply(pd.to_numeric)

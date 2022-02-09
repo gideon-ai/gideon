@@ -1,0 +1,8 @@
+#iloc to be used when you want to index using default indices
+market_df.iloc[0:4,1:3]                                   # It will return rows from 0-3 and columns 1 and 2
+
+#loc to be used when you want to use user-defined indices
+market_df.loc[:,"Address":"State"]    #It will return all the rows and the columns between 'Address' and 'State' (all inclusive)
+
+#Selectively extracting rows and columns from another dataframe
+df_temp = df1[['Date','Time']].iloc[df2.index,:]
