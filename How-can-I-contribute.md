@@ -33,17 +33,21 @@ Best place to start a conversation would be https://github.com/gideon-ai/gideon/
 
 ### What exactly is Gideon?
 
-Gideon is an autonomous code recommendation engine that converts English speech to popular ML coding patterns. 
+Gideon is an autonomous code recommendation engine that converts English speech to popular ML coding patterns. You explain your problem/need in English, Gideon generates Python code that fulfils the requirement. 
 
 ### What is the vision?
 
-Gideon's vision is to be a coding assistant that lets people turn ideas into enterprise-grade products using the best coding practices. 
+Gideon's vision is to be a coding assistant that lets people turn ideas into enterprise-grade products using the best coding practices. With the help of the open-source community, the plan is to expand the coding patterns beyond ML to front-end web development, mobile application development and backend setup.
 
 ## How Can I Contribute?
 
 ### Conversations with Gideon
 
-Imagine you are speaking with a coding assitant that can help you build anything you want. How are you going to start the conversation?
+Imagine you are speaking with a coding assistant that can help you build anything you want. How are you going to start the conversation?
+
+Gideon needs sample conversations to get trained. If you are a Product Manager or a Data Scientist who wishes to build an AI Product from scratch, think of how the conversation with Gideon might end up.
+
+
 
 What kind of ML functionality do you want to build? Is it building a Transformer model? Is it visualizing a continuous variable?
 
