@@ -1,11 +1,11 @@
 ## This file contains the list of conversations that Gideon can handle at this point of time. Feel free to add more conversations and coding patterns.
 
-Conversation 1:
+Conversation 1:  
 
-User: "How can I perform Customer Segmentation?"
-Gideon: Here is a coding pattern that can help you: [Build a K-Means Clustering model](ml-code-patterns/model%20training/customer_segmentation_plotly)
+User: "How can I perform Customer Segmentation?"  
+Gideon: Here is a coding pattern that can help you: [Build a K-Means Clustering model](ml-code-patterns/model%20training/customer_segmentation_plotly) 
 
-Conversation 2:
+Conversation 2:  
 
 User: "How to build a resume scorecard?"  
 Gideon: Here are the steps to build a resume scorecard:  
