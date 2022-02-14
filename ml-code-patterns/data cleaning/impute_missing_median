@@ -1,0 +1,3 @@
+def impute_median(series):
+    return series.fillna(series.median())
+titanic_input.Age=by_gender_class['Age'].transform(impute_median)

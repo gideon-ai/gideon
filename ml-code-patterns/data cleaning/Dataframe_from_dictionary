@@ -1,0 +1,76 @@
+Case 1: Default approach where the index starts from 0 to 1
+import pandas as pd
+  
+# dictionary with list object in values
+details = {
+    'Name' : ['Ankit', 'Aishwarya', 'Shaurya', 'Shivangi'],
+    'Age' : [23, 21, 22, 21],
+    'University' : ['BHU', 'JNU', 'DU', 'BHU'],
+}
+  
+# creating a Dataframe object 
+df = pd.DataFrame(details)
+  
+Case 2: Create DataFrame from Dictionary with user-defined indexes.
+# dictionary with list object in values
+details = {
+    'Name' : ['Ankit', 'Aishwarya', 'Shaurya', 'Shivangi'],
+    'Age' : [23, 21, 22, 21],
+    'University' : ['BHU', 'JNU', 'DU', 'BHU'],
+}
+  
+# creating a Dataframe object from dictionary 
+# with custom indexing
+df = pd.DataFrame(details, index = ['a', 'b', 'c', 'd'])
+
+Case 3: Create DataFrame from Dictionary with required columns only.
+# dictionary with list object in values
+details = {
+    'Name' : ['Ankit', 'Aishwarya', 'Shaurya', 'Shivangi'],
+    'Age' : [23, 21, 22, 21],
+    'University' : ['BHU', 'JNU', 'DU', 'BHU'],
+}
+  
+# creating a Dataframe object with skipping 
+# one column i.e skipping age column.
+df = pd.DataFrame(details, columns = ['Name', 'University'])
+
+Case 4: Create DataFrame from Dictionary with different Orientation
+# dictionary with list object in values
+details = {
+    'Name' : ['Ankit', 'Aishwarya', 'Shaurya', 'Shivangi'],
+    'Age' : [23, 21, 22, 21],
+    'University' : ['BHU', 'JNU', 'DU', 'BHU'],
+}
+  
+# creating a Dataframe object in which dictionary
+# key is act as index value and column value is
+# 0, 1, 2...
+df = pd.DataFrame.from_dict(details, orient = 'index')
+
+Case 5: Create DataFrame from nested Dictionary.
+# dictionary with dictionary object
+# in values i.e. nested dictionary
+details = { 
+    0 : {
+        'Name' : 'Ankit',
+        'Age' : 22,
+        'University' : 'BHU'
+        },
+    1 : {
+        'Name' : 'Aishwarya',
+        'Age' : 21,
+        'University' : 'JNU'
+        },
+    2 : {
+        'Name' : 'Shaurya',
+        'Age' : 23,
+        'University' : 'DU'
+        }
+}
+  
+# creating a Dataframe object from nested dictionary in which inside dictionary key is act as index value and column value is 0, 1, 2...
+df = pd.DataFrame(details)
+  
+# swap the columns with indexes
+df = df.transpose()

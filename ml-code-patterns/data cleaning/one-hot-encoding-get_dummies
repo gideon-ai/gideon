@@ -1,0 +1,4 @@
+class_dummies = pd.get_dummies(titanic_input['Pclass'],prefix='class')
+embark_dummies = pd.get_dummies(titanic_input['Embarked'],prefix='port')
+titanic_input = pd.concat([titanic_input,class_dummies,embark_dummies],axis=1)
+titanic_input.drop(['Pclass','Embarked'],axis=1,inplace=True)

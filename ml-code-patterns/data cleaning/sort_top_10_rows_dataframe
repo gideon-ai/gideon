@@ -1,0 +1,1 @@
+df.iloc[df['Column1'].sort_values(ascending=False)[:10].index, :]

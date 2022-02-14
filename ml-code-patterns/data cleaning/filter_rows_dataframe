@@ -1,0 +1,11 @@
+#I’m interested in the titanic passengers older than 35 years.
+above_35 = titanic[titanic["Age"] > 35]
+
+#I’m interested in the Titanic passengers from cabin class 2 and 3.
+class_23 = titanic[titanic["Pclass"].isin([2, 3])]
+
+#Another way
+class_23 = titanic[(titanic["Pclass"] == 2) | (titanic["Pclass"] == 3)]
+
+#I want to work with passenger data for which the age is known.
+age_no_na = titanic[titanic["Age"].notna()]

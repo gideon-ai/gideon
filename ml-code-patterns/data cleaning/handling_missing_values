@@ -1,0 +1,26 @@
+import pandas as pd
+#Dropping Columns
+cleandf_c = df.dropna()          # Drop column if any value in the column is NaN
+cleandf_c
+
+#Dropping Rows
+cleandf_r = df.dropna(axis=1)          # Drop row if any value in the row is NaN
+cleandf_r
+
+#Dropping columns only if any value in the column is NaN
+clean2 = df3.dropna(how='any')   # Drop column if any value in the column is NaN
+clean2
+
+#Dropping columns only if all the values are NaN
+clean3 = df3.dropna(how='all')   # Drop column if all values in the column are NaN
+clean3
+
+#Filling the na values in specific columns
+fillna2 = df.fillna({'Column1':8, 'Column2': 10})   # This will replace the missing values in Column1 and Column2 with 8 and 10 respectively
+fillna2
+
+#Filling the na values with mean
+fillna5 = df.fillna(round(df.mean()))  # This will substitute empty values with mean of the respective columns 
+fillna5
+
+#Replace missing values with average

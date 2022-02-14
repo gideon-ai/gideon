@@ -1,0 +1,11 @@
+import pandas as pd
+pd.merge(left_frame, right_frame, on='key', how='inner') #Traditional merge - happens only when one of the columns is common among the dataframes
+pd.merge(left_frame, right_frame, on='key', how='left')  #All the data in the left dataframe is retained
+pd.merge(left_frame, right_frame, on='key', how='right') #All the data in the right dataframe is retained
+pd.merge(left_frame, right_frame, on='key', how='outer') #All the data in both the dataframes is retained
+
+#Merge when the common data is present in two different columns in the left and right dataframes
+df_merge = pd.merge(df1, df2, how='inner', left_on='df1_common_column', right_on='df2_common_column')
+
+pd.concat([left_frame, right_frame])   #Concatenation is going to happen with right_frame appended below the left_frame
+pd.concat([left_frame, right_frame], axis=1) #Concatenation is going to happen with right_frame adjacent to the left_frame

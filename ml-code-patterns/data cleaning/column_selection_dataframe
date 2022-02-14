@@ -1,0 +1,6 @@
+import pandas as pd
+titanic = pd.read_csv("data/titanic.csv")
+
+#I’m interested in the age and sex of the Titanic passengers.
+age_sex = titanic[["Age", "Sex"]]
+

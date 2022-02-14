@@ -1,0 +1,5 @@
+#I’m interested in the names of the passengers older than 35 years.
+adult_names = titanic.loc[titanic["Age"] > 35, "Name"]
+
+#I’m interested in rows 10 till 25 and columns 3 to 5.
+titanic.iloc[9:25, 2:5]
