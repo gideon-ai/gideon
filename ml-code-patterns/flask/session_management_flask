@@ -1,0 +1,2 @@
+Set a constant value to the below configuration parameter in the flask application
+app.config['SECRET_KEY'] = "dabpwAcUNscaVLhWsKSwNlydMpeBFSfOHIptscFjCzRslDFCFukTTEoGgBkW"

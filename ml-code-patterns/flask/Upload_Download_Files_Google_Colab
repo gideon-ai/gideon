@@ -1,0 +1,8 @@
+#Upload
+from google.colab import files
+files.upload()
+
+#Download
+from google.colab import files
+df.to_csv('example.csv') #'df' is the dataframe whose content you wish to download
+files.download('example.csv') 

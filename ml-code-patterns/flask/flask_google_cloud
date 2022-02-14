@@ -1,0 +1,14 @@
+1.Create a project
+2. Create a service account and download the key in json format. For this example, we will use the json filename "hunter.json"
+3.Create a VM in Compute Engine
+4.SSH to the VM and run the below commands:
+- sudo apt-get install zip
+- sudo apt-get install unzip
+5. Upload your entire flask directory as a zip file(aiq.zip) along with hunter.json
+6. unzip aiq.zip
+7. Move the hunter.json file to the directory aiq that got created
+8. cd aiq
+9. gcloud auth activate-service-account --key-file="hunter.json" 
+10.gcloud config set app/cloud_build_timeout 1800
+11.sudo apt-get install python3-distutils
+12.gcloud app deploy --stop-previous-version

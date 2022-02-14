@@ -1,0 +1,13 @@
+import pymongo
+from pymongo import MongoClient
+import pandas as pd 
+def connect_db():
+	client = MongoClient("mongodb+srv://<username>:<password>@logincluster-d0rbg.gcp.mongodb.net/<database>?retryWrites=true&w=majority")
+	return client
+
+client = connect_db()
+db = client["feedbackfirst"]  #feedbackfirst is the name of the database
+
+df = pd.read_csv(r"100AIProductIdeas.csv")
+records=df.to_dict(orient='records')
+result = db.products.insert_many(records)  #"products" is the name of the collection into which the records are getting inserted
