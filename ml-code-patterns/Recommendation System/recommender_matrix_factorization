@@ -1,0 +1,60 @@
+import numpy
+import numpy as np
+import pandas as pd
+import progressbar as pb
+#R is a matrix holding the true values (with unknown values marked as 0). P and Q are the two matrices that, when multiplied, form an 
+#estimate for R. K represents the columns of P and the rows of Q — that is, P is of dimensions M by P and Q of dimensions P by N, where R is of dimensions M by N
+def matrix_factorization(R, P, Q, K, steps=1000, alpha=0.0002, beta=0.02):
+    Q = Q.T
+    for step in pb.progressbar(range(steps)):
+        for i in range(len(R)):
+            for j in range(len(R[i])):
+                if R[i][j] > 0:
+                    eij = R[i][j] - numpy.dot(P[i,:],Q[:,j])
+                    for k in range(K):
+                        P[i][k] = P[i][k] + alpha * (2 * eij * Q[k][j] - beta * P[i][k])
+                        Q[k][j] = Q[k][j] + alpha * (2 * eij * P[i][k] - beta * Q[k][j])
+        eR = numpy.dot(P,Q)
+        e = 0
+        for i in range(len(R)):
+            for j in range(len(R[i])):
+                if R[i][j] > 0:
+                    e = e + pow(R[i][j] - numpy.dot(P[i,:],Q[:,j]), 2)
+                    for k in range(K):
+                        e = e + (beta/2) * (pow(P[i][k],2) + pow(Q[k][j],2))
+        if e < 0.001:
+            break
+    return P, Q.T
+    
+  #Getting a dataset in the format above
+  c_data = pd.DataFrame()
+movies = []
+c_data['id'] = 0
+for movie in pb.progressbar(data['movie']):
+    if movie not in movies:
+        movies.append(movie)
+        c_data[movie] = 0
+users = []
+for user in pb.progressbar(data['user']):
+    if user not in users:
+        users.append(user)
+        append_dic = {'id':user} 
+        for column in c_data.columns:
+            if column != 'id':
+                append_dic[column] = 0
+        c_data = c_data.append(pd.DataFrame([append_dic]))
+c_data = c_data.set_index('id')
+for index in pb.progressbar(range(len(data)-1)):
+    c_data.loc[data['user'][index],data['movie'][index]] = data['rating'][index]
+ 
+ 
+R = numpy.array(c_data)
+N = len(c_data)
+M = len(c_data[0])
+K = 2
+
+P = numpy.random.rand(N,K)
+Q = numpy.random.rand(M,K)
+
+nP, nQ = matrix_factorization(R, P, Q, K)
+nR = numpy.dot(nP, nQ.T)

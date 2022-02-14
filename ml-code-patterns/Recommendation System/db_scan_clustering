@@ -1,0 +1,38 @@
+Why DBSCAN?
+K-Means clusters are easily influenced by outliers. Also, we need to mention the no.of clusters in advance. DB-Scan overcomes these limitations.
+
+DBScan Hyperparameters
+
+eps - float, default=0.5
+The maximum distance between two samples for one to be considered as in the neighborhood of the other. This is not a maximum bound on the distances of points within a cluster. This is the most important DBSCAN parameter to choose appropriately for your data set and distance function.
+
+min_samples - int, default=5
+The number of samples (or total weight) in a neighborhood for a point to be considered as a core point. This includes the point itself.
+
+#Step 1 - Identify the optimal value of eps
+
+from sklearn.neighbors import NearestNeighbors
+neigh = NearestNeighbors(n_neighbors=2)
+nbrs = neigh.fit(X)
+distances, indices = nbrs.kneighbors(X)
+
+distances = np.sort(distances, axis=0)
+distances = distances[:,1]
+plt.plot(distances)
+
+#The optimal value for epsilon will be found at the point of maximum curvature.
+
+#Step 2 - Build the DBSCAN Clustering Model
+from sklearn.cluster import DBSCAN
+db = DBSCAN(eps=0.4, min_samples=20)
+db.fit(X)
+
+#Step 3 - Visualize the Clusters
+y_pred = db.fit_predict(X)
+plt.figure(figsize=(10,6))
+plt.scatter(X[:,0], X[:,1],c=y_pred, cmap='Paired')
+plt.title("Clusters determined by DBSCAN")
+
+#Step 4 - Identify the outliers
+#Noise (or outliers) are given -1 label. Let’s check the number of outliers:
+db.labels_[db.labels_ == -1].size

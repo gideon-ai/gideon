@@ -1,0 +1,47 @@
+from sklearn.cluster import KMeans
+from sklearn import metrics
+from sklearn.feature_extraction.text import TfidfVectorizer
+vectorizer = TfidfVectorizer(stop_words='english')
+X = vectorizer.fit_transform(df['desc']) #desc column contains the text
+
+# Continuing after vectorization step, find the optimal no.of clusters
+sse = {}
+# Looping over multiple values of k from 1 to 30
+for k in range(1, 40):
+    kmeans = KMeans(n_clusters=k, init='k-means++', max_iter=100).fit(X)
+    comb_frame["clusters"] = kmeans.labels_
+    sse[k] = kmeans.inertia_
+# Plotting the curve with 'k'-value vs SSE
+plt.plot(list(sse.keys()), list(sse.values()))
+plt.xlabel("Number of cluster")
+plt.ylabel("SSE")
+# Save the Plot in current directory
+plt.savefig('elbow_method.png')
+
+#Let us say, you tried various cluster combinations and found that the elbow occurs at 8. Then true_k below becomes 8
+# Running model with 15 different centroid initializations & maximum iterations are 500
+model = KMeans(n_clusters=true_k, init='k-means++', max_iter=500, n_init=15)
+model.fit(X)
+
+# Top terms in each clusters.
+print("Top terms per cluster:")
+order_centroids = model.cluster_centers_.argsort()[:, ::-1]
+terms = vectorizer.get_feature_names()
+for i in range(true_k):
+    print("Cluster %d:" % i),
+    for ind in order_centroids[i, :15]:
+        print(' %s' % terms[ind]),
+
+# Save machine learning model
+filename = 'finalized_model.sav'
+pickle.dump(model, open(filename, 'wb'))
+
+#Utility function that will predict the cluster
+def cluster_predict(str_input):
+    Y = vectorizer.transform(list(str_input))
+    prediction = model.predict(Y)
+    return prediction
+ 
+# Create new column for storing predicted categories from our trained model.
+df['ClusterPrediction'] = df['desc'].apply(cluster_predict)
+

@@ -1,0 +1,18 @@
+#PCA
+from sklearn.decomposition import PCA
+pca = PCA(n_components=40) #Assumption here is that you have already decided how many principal components are needed for your dataset
+Transformed_vector =pca.fit_transform(df_scld) #df_scld is the original dataset
+print(Transformed_vector)
+
+from sklearn.cluster import KMeans
+num_of_clusters = range(2,25)
+error = []
+
+#K-Means Clustering
+for num_clusters in num_of_clusters:
+    clusters = KMeans(num_clusters)
+    clusters.fit(Transformed_vector)
+    error.append(clusters.inertia_/100)
+    
+df=pd.DataFrame({"Cluster_Numbers":num_of_clusters, "Error_Term":error})
+df
