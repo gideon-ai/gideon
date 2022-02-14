@@ -1,0 +1,15 @@
+Understand the underlying distribution
+
+#Histogram - You go for this when the no.of bins are pre-decided
+df['Column'].plot(kind='hist',  figsize=(15, 7), color='brown', yticks=np.arange(0, 22, 3), xticks=[bins])
+
+#KDE Plot - You go for this when you want to understand the distribution irrespective of binning
+df['Column'].plot(kind='kde', figsize=(15, 7), color='black')
+
+Understand the trend 
+
+#Area Chart
+df['Column'].plot(kind='area', figsize=(15,7), color='violet', fontsize=13)
+
+#Line Chart
+df['Column'].plot(kind='line', figsize=(15,7), color='violet', fontsize=13)

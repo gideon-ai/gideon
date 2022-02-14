@@ -1,0 +1,20 @@
+#Stacked Column Chart - Compare a categorical variable and the average value of a continuous column
+
+df.groupby(['Category'])['Column1'].mean().plot(kind='bar', figsize=(15, 7), color='orange')
+df.groupby(['Category'])['Column2'].mean().plot(kind='bar', figsize=(15, 7), color='grey')
+df.groupby(['Category'])['Column3'].mean().plot(kind='bar', figsize=(15, 7), color='red', fontsize=13)
+
+#Box plot - Two Categorical variables along with Continuous
+plt.figure(figsize=(20,10))
+sns.boxplot(data=df,x='Category1',y='Cont1',hue='Category2')
+
+#Violin plot - Two categorical variables along with continuous and if you are interested in the underlying distribution of continuous variable
+plt.figure(figsize=(25,20))
+sns.violinplot(data=df,x='Cont1',y='Category1',hue='Category2',palette='rainbow')
+
+#Swarm plot - When the number of data points in the continuous variable is small
+sns.swarmplot(x="Category1", y="Cont1", data=df)
+
+#Factor plot - Interested in learning about the trend of the continuous variable
+sns.factorplot(x ='Category1', y ='Cont1', data = df)
+

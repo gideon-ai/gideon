@@ -1,0 +1,28 @@
+#Usually, you should just show a table of proportions when you have two categorical variables.
+#Countplot
+plt.figure(figsize=(10,5))
+sns.countplot("Category1",hue="Category2", data=df)
+
+#Countplot with bars ordered
+plt.figure(figsize=(10,5))
+sns.countplot("Category1",hue="Category2",order=df['Category1'].value_counts().index, data=df)
+
+#Crosstab
+df_cross = pd.crosstab(df['Category1'],df['Category2'])
+df_cross.plot(kind='bar')
+
+#Mosaic Plot
+from statsmodels.graphics.mosaicplot import mosaic
+mosaic(data=df, index=['Category1', 'Category2'])
+plt.show()
+
+#Using Piecharts
+f,ax = plt.subplots(1,4,figsize=(22,7))
+mh['category1'][mh['category2'] == 'category2_value1'].value_counts().plot.pie(explode=[0,0.2],autopct='%1.1f%%',ax=ax[0],shadow=True)
+mh['category1'][mh['category2'] == 'category2_value2'].value_counts().plot.pie(explode=[0,0.2],autopct='%1.1f%%',ax=ax[1],shadow=True)
+mh['category1'][mh['category2'] == 'category2_value3'].value_counts().plot.pie(explode=[0,0.2],autopct='%1.1f%%',ax=ax[2],shadow=True)
+mh['category1'][mh['category2'] == 'category2_value4'].value_counts().plot.pie(explode=[0,0.2],autopct='%1.1f%%',ax=ax[3],shadow=True)
+ax[0].set_title('Title1')
+ax[1].set_title('Title2)
+ax[2].set_title('Title3')
+ax[3].set_title('Title4')

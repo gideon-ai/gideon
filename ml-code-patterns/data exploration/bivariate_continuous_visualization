@@ -1,0 +1,27 @@
+#Scatter Plot (Pandas)
+df.plot(kind='scatter', x='Column1', y='Column2', figsize=(10, 6), color='purple', grid=False)
+
+#Scatter Plot(Seaborn)  
+sns.scatterplot(data=df, x='Column1', y='Column2', hue='Categorical_Column')
+
+#Scatter Plot(Plotly) (Bubble Chart)
+data = [go.Scatter(y=df['Column1'].values, x=df['Column2'].values, mode='markers',marker=dict(size=df['Column1'].values, color=df['Column1'].values, colorscale='Rainbow',showscale=True))]
+layout = go.Layout(autosize=True, height=800, title = go.layout.Title(text='Scatter plot'), 
+
+                   hovermode='closest', xaxis=dict(showgrid=False, zeroline=False, showline=False), 
+
+                   yaxis=dict(title='Title', ticklen=5, gridwidth=2, showgrid=False, zeroline=False, showline=False), 
+
+                   showlegend=False)
+                   
+fig = go.Figure(data=data, layout=layout)
+fig.show()
+
+#Reg Plot - Plots the regression line
+sns.regplot(data=df,x='Column1',y='Column2',color='brown')
+
+#Hexbin Plot - When the number of data points are huge
+df.plot(kind='hexbin',x='Column1',y='Column2',gridsize=25,figsize=(15,10),colormap='Reds',xticks=np.arange(0,80))
+
+#Joint Plot - Provides both bivariate and univariate analysis of the continuous variables in the same graph
+sns.jointplot(x = "Column1", y = "Column2", kind = "hex", data = df)

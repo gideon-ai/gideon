@@ -1,0 +1,12 @@
+#Pie Chart - When you want to compare percentage contribution of different categories
+num_categories = 4 #Number of categories 
+explode = np.ones(num_categories)/10
+df['Column'].value_counts().plot(kind='pie', explode=[explode], fontsize=14, autopct='%.2f%%', wedgeprops=dict(width=0.15), shadow=True, startangle=160, figsize=(10,10), cmap='inferno', legend=True)
+
+#Bar Chart - When you want to compare the absolute numbers
+
+df['Category'].value_counts().plot(kind='bar',figsize=(10,5),colormap='rainbow',fontsize=13,yticks=np.arange(0,19,2))
+plt.title('Breakdown of Items across categories')
+plt.xlabel('Category')
+plt.ylabel('Count')
+plt.savefig('breakdown-category.png')

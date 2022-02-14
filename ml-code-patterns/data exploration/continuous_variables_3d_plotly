@@ -1,0 +1,42 @@
+#x,y,z below are three continuous variables belonging to the dataframe named 'train'.
+import plotly.plotly as py
+import plotly.graph_objs as go
+
+x = train['budget'].values
+y = train['popularity'].values
+z = train['revenue'].values
+text = train['title'].values
+
+trace1 = go.Scatter3d(
+    x=x,
+    y=y,
+    z=z,
+    text=text,
+    mode='markers',
+    marker=dict(
+        size=12,
+        color=z,                # set color to an array/list of desired values
+        colorscale='Viridis',   # choose a colorscale
+        opacity=0.8
+    )
+)
+
+data = [trace1]
+layout = go.Layout(
+    title= "Budget v Popularity v Revenue of Movies",
+    margin=dict(
+        l=0,
+        r=0,
+        b=0,
+        t=0
+    ),
+     scene = dict(
+    xaxis = dict(
+        title='x: Budget'),
+    yaxis = dict(
+        title='y: Popularity'),
+    zaxis = dict(
+        title='z: Revenue'),),
+)
+fig = go.Figure(data=data, layout=layout)
+py.iplot(fig, filename='3d-scatter-colorscale')

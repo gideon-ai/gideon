@@ -1,0 +1,20 @@
+from sklearn.decomposition import PCA
+pca = PCA(n_components=len(df_scld))  #df_scld is the dataframe that contains the data. Preferably, this data should be scaled/normalized.
+pca.fit(df_scld)
+variance_ratio = pca.explained_variance_ratio_
+variance_ratio
+
+#Variance Visualization
+import matplotlib.pyplot as plt
+plt.figure(figsize=[10,5])
+features = range(pca.n_components_)
+plt.bar(features, pca.explained_variance_)
+plt.xlabel('PCA feature')
+plt.ylabel('variance')
+plt.xticks(features)
+plt.show()
+
+#Elbow Plot
+variance_ratio_cum_sum=np.cumsum(np.round(pca.explained_variance_ratio_, decimals=4)*100)
+print(variance_ratio_cum_sum)
+plt.plot(variance_ratio_cum_sum)
