@@ -1,0 +1,44 @@
+from sklearn.ensemble import AdaBoostClassifier, RandomForestClassifier, GradientBoostingClassifier
+from sklearn.neighbors import KNeighborsClassifier
+from sklearn.svm import SVC, LinearSVC
+from xgboost import XGBClassifier
+from lightgbm import LGBMClassifier
+from sklearn import ensemble
+
+# Importing other tools
+from sklearn import model_selection
+
+vote_est = [
+    #Ensemble Methods: http://scikit-learn.org/stable/modules/ensemble.html
+    
+    ('rfc', RandomForestClassifier()),
+    
+    #Nearest Neighbor: http://scikit-learn.org/stable/modules/neighbors.html
+    ('knn', KNeighborsClassifier()),
+    
+    #xgboost: http://xgboost.readthedocs.io/en/latest/model.html
+   ('xgb', XGBClassifier()),
+   ('lgbm',LGBMClassifier())
+
+]
+
+
+#Hard Vote or majority rules
+vote_hard = ensemble.VotingClassifier(estimators = vote_est , voting = 'hard')
+vote_hard_cv = model_selection.cross_validate(vote_hard, X, y, cv  = skf) #X,y contain the input and output respectively
+vote_hard.fit(X, y)
+#print("Hard Voting Training w/bin score mean: {:.2f}". format(vote_hard_cv['train_score'].mean()*100)) 
+print("Hard Voting Test w/bin score mean: {:.2f}". format(vote_hard_cv['test_score'].mean()*100))
+print("Hard Voting Test w/bin score 3*std: +/- {:.2f}". format(vote_hard_cv['test_score'].std()*100*3))
+print('-'*10)
+
+
+#Soft Vote or weighted probabilities
+vote_soft = ensemble.VotingClassifier(estimators = vote_est , voting = 'soft')
+vote_soft_cv = model_selection.cross_validate(vote_soft, X, y, cv  = skf)
+vote_soft.fit(X, y)
+
+#print("Soft Voting Training w/bin score mean: {:.2f}". format(vote_soft_cv['train_score'].mean()*100)) 
+print("Soft Voting Test w/bin score mean: {:.2f}". format(vote_soft_cv['test_score'].mean()*100))
+print("Soft Voting Test w/bin score 3*std: +/- {:.2f}". format(vote_soft_cv['test_score'].std()*100*3))
+print('-'*10)

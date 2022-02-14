@@ -1,0 +1,33 @@
+#Generate TFIDF Vectorizer and Export
+stopset = set(stopwords.words('english'))
+vectorizer = TfidfVectorizer(use_idf=True, lowercase=True, strip_accents='ascii', stop_words=stopset)
+X = vectorizer.fit_transform(df.text) #df.text contains the input text
+
+# Extract the coefficients from the model and sort them by index.
+coefficients = clf.coef_ #clf is the Naive Bayes Model
+index = coefficients.argsort()
+
+# Extract the feature names.
+import numpy as np
+feature_names = np.array(vectorizer.get_feature_names())
+
+# feature names: Smallest 30 + largest 30.
+feature_names_comb = list(feature_names[index][0][:30]) + list(feature_names[index][0][-31::1])
+
+# coefficients magnitude: Smallest 30 + largest 30.
+index_comb = list(coefficients[0][index[0][:30]]) + list(coefficients[0][index[0][-31::1]])
+
+# Make sure the x-axis be the number from 0 to the length of the features selected not the feature names.
+# Once the bar is plotted, the features are placed as ticks.
+import matplotlib.pyplot as plt
+plt.figure(figsize=(25,10))
+barlist = plt.bar(list(i for i in range(61)), index_comb)
+plt.xticks(list(i for i in range(61)),feature_names_comb,rotation=75,size=15)
+plt.ylabel('Coefficient magnitude',size=20)
+plt.xlabel('Features',size=20)
+
+# color the first smallest 30 bars red
+for i in range(30):
+    barlist[i].set_color('red')
+
+plt.show()

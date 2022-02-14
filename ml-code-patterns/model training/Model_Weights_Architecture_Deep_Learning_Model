@@ -1,0 +1,53 @@
+'''Keras also supports a simpler interface to save both the model weights and model architecture together into a single H5 file.
+
+Saving the model in this way includes everything we need to know about the model, including:
+
+Model weights.
+Model architecture.
+Model compilation details (loss and metrics).
+Model optimizer state.
+
+This means that we can load and use the model directly, without having to re-compile it. '''
+
+# MLP for Pima Indians Dataset saved to single file
+from numpy import loadtxt
+from keras.models import Sequential
+from keras.layers import Dense
+# load pima indians dataset
+dataset = loadtxt("pima-indians-diabetes.csv", delimiter=",")
+# split into input (X) and output (Y) variables
+X = dataset[:,0:8]
+Y = dataset[:,8]
+# define model
+model = Sequential()
+model.add(Dense(12, input_dim=8, activation='relu'))
+model.add(Dense(8, activation='relu'))
+model.add(Dense(1, activation='sigmoid'))
+# compile model
+model.compile(loss='binary_crossentropy', optimizer='adam', metrics=['accuracy'])
+# Fit the model
+model.fit(X, Y, epochs=150, batch_size=10, verbose=0)
+# evaluate the model
+scores = model.evaluate(X, Y, verbose=0)
+print("%s: %.2f%%" % (model.metrics_names[1], scores[1]*100))
+# save model and architecture to single file
+model.save("model.h5")
+print("Saved model to disk")
+
+
+# load and evaluate a saved model
+from numpy import loadtxt
+from keras.models import load_model
+
+# load model
+model = load_model('model.h5')
+# summarize model.
+model.summary()
+# load dataset
+dataset = loadtxt("pima-indians-diabetes.csv", delimiter=",")
+# split into input (X) and output (Y) variables
+X = dataset[:,0:8]
+Y = dataset[:,8]
+# evaluate the model
+score = model.evaluate(X, Y, verbose=0)
+print("%s: %.2f%%" % (model.metrics_names[1], score[1]*100))

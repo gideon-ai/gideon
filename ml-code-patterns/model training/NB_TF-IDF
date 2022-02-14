@@ -1,0 +1,25 @@
+from sklearn.feature_extraction.text import TfidfVectorizer
+import pandas as pd
+from sklearn.metrics import accuracy_score,roc_auc_score
+from sklearn.model_selection import train_test_split
+
+vect = TfidfVectorizer(lowercase=True, strip_accents='ascii', use_idf=True)
+x= vect.fit_transform(df1['review']) #df1 contains the 'review' column that contains the movie review text
+
+#trian and test data
+xtrain,xtest,ytrain,ytest =  train_test_split(x,y,random_state=1)
+
+#build model 
+from sklearn import naive_bayes
+nb = naive_bayes.MultinomialNB()
+nb.fit(xtrain,ytrain)
+n_pred = nb.predict(xtest)
+
+#evaluate model 
+print ("Accuracy of model :", accuracy_score(ytest, n_pred))
+print ("Roc score for model :", roc_auc_score(ytest, nb.predict_proba(xtest)[:,1]))
+
+#Making prediction on a new review
+review = ("amazing service")
+x_new=vect.transform([review]) #vect contains the original embeddings
+nb.predict(x_new)

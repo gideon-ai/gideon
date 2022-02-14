@@ -1,0 +1,35 @@
+# Selecting the Features and the Labels
+
+X = train[['budget','popularity','runtime']]
+y = train['revenue']
+
+# Separating the train and the validation models
+
+from sklearn.model_selection import train_test_split
+X_train, X_test, y_train, y_test = train_test_split(X, y, test_size=0.3, random_state=101)
+
+# Metric of choice is Root Mean Square Log Error
+
+def rmsle(y, y0):
+    assert len(y) == len(y0)
+    return np.sqrt(np.mean(np.power(np.log1p(y)-np.log1p(y0), 2)))
+
+
+# Building the Decision Tree Model
+
+from sklearn.tree import DecisionTreeRegressor
+dt_mod = DecisionTreeRegressor()
+
+# Fitting the model
+dt_mod.fit(X_train, y_train)
+
+# Making the predictions
+y_pred = dt_mod.predict(X_test)
+
+print("Root Mean Squared Log Error: ", rmsle(y_pred, y_test))
+
+# Making predictions in the test data
+test_pred = dt_mod.predict(test_df)
+
+test_pred_df = test_df.copy()
+test_pred_df["DT_Pred"] = test_pred

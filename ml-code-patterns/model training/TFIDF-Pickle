@@ -1,0 +1,13 @@
+#Generate TFIDF Vectorizer and Export
+stopset = set(stopwords.words('english'))
+vectorizer = TfidfVectorizer(use_idf=True, lowercase=True, strip_accents='ascii', stop_words=stopset)
+X = vectorizer.fit_transform(df.text) #df.text contains the input text
+
+import pickle
+pickle.dump(vectorizer.vocabulary_,open("feature.pkl","wb"))
+
+#Import a pretrained TFIDF Vectorizer
+message = "This is a really bad product"
+tf1_new = TfidfVectorizer(analyzer='word', ngram_range=(1,2), stop_words = stopset, lowercase = True,
+                           vocabulary = pickle.load(open("feature.pkl", "rb")))
+X_tf1 = tf1_new.transform([message])

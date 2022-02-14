@@ -1,0 +1,12 @@
+from fcmeans import FCM
+fcm = FCM()
+fcm.fit(df_scld)
+# outputs
+fcm_centers = fcm.centers
+#predicted clusters
+fcm_labels  = fcm.u.argmax(axis=1)
+
+#Output a dataframe that lists the company name and its corresponding cluster label.
+company = df['company_name'] #df is the dataframe that contains the raw data. df_scld is the dataframe that contains scaled data of just the numeric columns.
+c_dff = pd.DataFrame({'labels': fcm_labels, 'company': company}) #Here 'company' is the name of the column containing the sample names like companies,people etc
+c_dff.sort_values('labels')

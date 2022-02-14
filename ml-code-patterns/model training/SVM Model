@@ -1,0 +1,24 @@
+# Packages for analysis
+import pandas as pd
+import numpy as np
+from sklearn import svm
+
+# Packages for visuals
+import matplotlib.pyplot as plt
+import seaborn as sns; sns.set(font_scale=1.2)
+
+# Allows charts to appear in the notebook
+%matplotlib inline
+
+# Fit the SVM model
+model = svm.SVC(kernel='linear',decision_function_shape='ovr') #'ovr' comes into picture when there are more than 2 categories in the target variable. 'linear' kernel is used when a line can classify the two classes of datapoints along the input dimensions.
+X = df[['Column1','Column2']]
+y = df['Target']
+model.fit(X,y)
+
+#Hyperparameter tuning
+params={"kernel":('poly','rbf','linear'),"C":[1, 100],"gamma":[0.03,1,10],"decision_function_shape":('ovr','ovo')}## Please keep patience, It'll take long time
+from sklearn.model_selection import GridSearchCV
+grid=GridSearchCV(model,params)
+grid_model=grid.fit(X,y) #You can replace the data here with training data or validation data
+grid_model.best_params_
