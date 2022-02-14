@@ -1,0 +1,87 @@
+from nltk.corpus import stopwords
+from nltk.stem import PorterStemmer
+from nltk.tokenize import word_tokenize, sent_tokenize
+
+text="""
+An old man lived in the village. He was one of the most unfortunate people in the world. The whole village was tired of him; he was always gloomy, he constantly complained and was always in a bad mood.
+The longer he lived, the more bile he was becoming and the more poisonous were his words. People avoided him, because his misfortune became contagious. It was even unnatural and insulting to be happy next to him.
+
+He created the feeling of unhappiness in others.
+But one day, when he turned eighty years old, an incredible thing happened. Instantly everyone started hearing the rumour: “An Old Man is happy today, he doesn’t complain about anything, smiles, and even his face is freshened up.”
+The whole village gathered together. The old man was asked:
+Villager: What happened to you?
+“Nothing special. Eighty years I’ve been chasing happiness, and it was useless. And then I decided to live without happiness and just enjoy life. That’s why I’m happy now.” – An Old Man
+
+"""
+
+### Step 1: Create a function to calculate frequency of words in the given text
+def frequency_table(text_string):
+    stopWords = set(stopwords.words("english"))
+    words = word_tokenize(text_string)
+    ps = PorterStemmer()
+    
+    freqTable = dict()
+    for word in words:
+        word = ps.stem(word)
+        if word in stopWords:
+            continue
+        if word in freqTable:
+            freqTable[word] += 1
+        else:
+            freqTable[word] = 1
+
+    return freqTable
+    
+ ### Step 2: Create a score function that calculates score for every sentence.
+ def score_sentences(sentences, freqTable):
+    sent_value = dict()
+
+    for sentence in sentences:
+        word_count = (len(word_tokenize(sentence)))
+        word_count_except_sw = 0
+        for wordValue in freqTable:
+            if wordValue in sentence.lower():
+                word_count_except_sw += 1
+                if sentence[:10] in sent_value:
+                    sent_value[sentence[:10]] += freqTable[wordValue]
+                else:
+                    sent_value[sentence[:10]] = freqTable[wordValue]
+
+        if sentence[:10] in sent_value:
+            sent_value[sentence[:10]] = sent_value[sentence[:10]] / word_count_except_sw
+
+    return sent_value
+    
+#### Step 3: Create a function to find the average score
+
+def find_average_score(sent_value):
+    sumValues = 0
+    for entry in sent_value:
+        sumValues += sent_value[entry]
+
+    # Average value of a sentence from original text
+    average = (sumValues / len(sent_value))
+
+    return average
+    
+### Step 4: Create a function to call all the above functions
+
+def run_summarization(text):
+    # 1) Create the word frequency table
+    freq_table = frequency_table(text)
+
+    # 2) Tokenize the sentences
+    sentences = sent_tokenize(text)
+
+    # 3) Important Algorithm: score the sentences
+    sentence_scores = score_sentences(sentences, freq_table)
+
+    # 4) Find the threshold
+    threshold = find_average_score(sentence_scores)
+
+    # 5) Important Algorithm: Generate the summary
+    summary = generate_summary(sentences, sentence_scores, 1.3 * threshold)
+
+    return summary
+
+output_summarizer = run_summarization(text)

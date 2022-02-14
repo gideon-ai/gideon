@@ -1,0 +1,21 @@
+import spacy
+import pandas as pd
+import os
+
+"""Load the pre-trained NLP model in spacy"""
+nlp=spacy.load("en_core_web_sm") 
+
+"""Create a list of common words to remove"""
+stop_words = nlp.Defaults.stop_words
+
+
+"""Define a function to extract keywords"""
+def get_topics(x):
+    doc=nlp(x) ## Tokenize and extract grammatical components
+    doc=[i.text for i in doc if i.text not in stop_words and i.pos_=="NOUN"] ## Remove common words and retain only nouns
+    doc=list(map(lambda i: i.lower(),doc)) ## Normalize text to lower case
+    doc=pd.Series(doc)
+    doc=doc.value_counts().head().index.tolist() ## Get 5 most frequent nouns
+    return doc
+    
+df_ner = df['review'].apply(get_topics) #'review' column contains the actual review

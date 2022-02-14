@@ -1,0 +1,14 @@
+import gensim
+Document=[]
+for doc in df['review']:
+  Document.append(doc.split(' '))  #Gensim takes input as a list of sentences which are in turn represented as a list of words.
+import logging    
+logging.basicConfig(format='%(asctime)s : %(levelname)s : %(message)s', level=logging.INFO)
+
+model=gensim.models.Word2Vec(Document,                                           # List of reviews
+                          min_count=10,                                          # we want words appearing atleast 10 times in the vocab otherwise ignore 
+                          workers=4,                                             # Use these many worker threads to train the model (=faster training with multicore machines
+                           size=50,                                              # it means aword is represented by 50 numbers,in other words the number of neorons in hidden layer is 50 
+                          window=5)                                              # 5 neighbors on the either side of a word
+model.save("word2vec movie-50")                                                    # We save this model for further use.
+

@@ -1,0 +1,24 @@
+import numpy as np
+import pandas as pd
+from os import path
+from PIL import Image
+from wordcloud import WordCloud, STOPWORDS, ImageColorGenerator
+
+import matplotlib.pyplot as plt
+%matplotlib inline
+
+text = " ".join(review for review in df.Review) #df['Review'] contains the reviews
+print ("There are {} words in the combination of all review.".format(len(text)))
+
+#Generating WordCloud
+stopwords = set(STOPWORDS)
+stopwords.update(["New Stop Word1","New Stop Word2"] #You can provide your own collection of stop words here
+wordcloud = WordCloud(stopwords=stopwords, max_font_size=70, max_words=35,background_color="black",colormap="plasma").generate(text)
+
+# Display the generated image:
+# the matplotlib way:
+plt.imshow(wordcloud, interpolation='bilinear')
+plt.axis("off")
+plt.show()
+
+wordcloud.to_file("review_wordcloud.png")

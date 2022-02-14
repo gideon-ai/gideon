@@ -1,0 +1,88 @@
+#Step 1: Split the data into training and test
+from tensorflow.keras.preprocessing.text import Tokenizer
+from tensorflow.keras.preprocessing.sequence import pad_sequences
+from tensorflow.keras.layers import Embedding
+from sklearn.model_selection import train_test_split
+
+X = df['review']
+y = df['sentiment']
+X_train,X_test, y_train,y_test = train_test_split(X, y, test_size = 0.30, random_state=0)
+
+#Step 2: Convert words to integers by Tokenization
+top_words = 10000 #reducing no of words to increase the processing speed, we can take 19874 also
+tokenizer = Tokenizer(num_words=top_words)
+tokenizer.fit_on_texts(X_train)
+X_train = tokenizer.texts_to_sequences(X_train)
+X_test = tokenizer.texts_to_sequences(X_test)
+
+#Step 3: Pad the sequences to ensure constant length of input samples
+padding_max_len = 300
+X_train = pad_sequences(X_train, maxlen=padding_max_len, padding='post')
+X_test = pad_sequences(X_test, maxlen=padding_max_len, padding='post')
+
+#Step 4: Generate the Word Embeddings using a pre-trained model
+word2vec_model = Word2Vec.load("model.w2v") #Give the name of the file that contains the pretrained word embeddings
+for word,i in sorted(tokenizer.word_index.items(), key = lambda x:x[1]):
+  if i > top_words:
+    break
+  if word in word2vec_model.wv.vocab:
+    embedding_vector = word2vec_model.wv[word]
+    print(embedding_vector)
+    embedding_matrix[i] = embedding_vector
+
+#Step 5: Create the embedding layer
+embedding_layer = Embedding(top_words+1, embedding_vector_length, weights=[embedding_matrix],
+                             input_length=padding_max_len,trainable=False)
+                             
+#Step 6: Build the graph
+from tensorflow.keras.models import Sequential
+from tensorflow.keras.layers import Dense,Dropout,Activation,BatchNormalization,Flatten,Embedding,Conv1D,MaxPooling1D
+from tensorflow.keras import regularizers
+from keras.constraints import Constraint
+from keras.constraints import unit_norm
+from matplotlib import pyplot as plt
+
+model12 = Sequential() #initializing ANN
+#Add embedding layer
+model12.add(embedding_layer)
+
+#CNN 1
+model12.add(Conv1D(filters=16, kernel_size=15, padding='same', strides=2, kernel_constraint=unit_norm(), input_shape=(20000, 300), activation='relu'))
+model12.add(BatchNormalization())
+model12.add(MaxPooling1D(pool_size=2))
+model12.add(Dropout(0.5))
+
+#CNN 2
+model12.add(Conv1D(filters=16, kernel_size=15, padding='same', strides=2, activation='relu'))
+model12.add(BatchNormalization())
+model12.add(MaxPooling1D(pool_size=2))
+model12.add(Dropout(0.5))
+
+
+#flattening the layer after CNN
+model12.add(Flatten())
+model12.add(Dense(units=8,activation='relu',kernel_regularizer=regularizers.l2(0.01)))
+model12.add(BatchNormalization())
+model12.add(Dropout(0.5))
+
+model12.add(Dense(units=1,activation='sigmoid')) ##Adding output layer #units=1 because its binary classification 
+ # activation='softmax' ---for multiclass in last layer
+ # activation='sigmoid' ---for binaryclass in last layer
+
+model12.compile(optimizer='adam',loss='binary_crossentropy', metrics=['accuracy'])
+
+#Step 7: Model Training
+#X_train and y_train passed in the model.fit() should be in array/dense form of matrix
+model_history = model12.fit(X_train, y_train, batch_size=200, epochs=60, validation_data=(X_test, y_test))
+
+#Step 8: Visualise training history
+plt.plot(model_history.history['accuracy'])
+plt.plot(model_history.history['val_accuracy'])
+plt.title('model accuracy')
+plt.ylabel('accuracy')
+plt.xlabel('epoch')
+plt.legend(['train', 'test'], loc="lower right")
+plt.show()
+
+#Step 9: Make Predictions
+y_pred_test = model12.predict(X_test)

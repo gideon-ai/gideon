@@ -1,0 +1,88 @@
+#1.Split the data into Training and Test
+from sklearn.model_selection import train_test_split
+
+X_train, X_test, y_train, y_test = train_test_split(
+    df['input_txt'],
+    df['target'],
+    test_size=0.2, 
+    random_state=42
+)
+
+#2.Build Tokenizer to get Number sequences for Each review
+from tensorflow.python.keras.preprocessing.text import Tokenizer
+top_words = 10000  #Vocab size
+t = Tokenizer(num_words=top_words)
+t.fit_on_texts(X_train.tolist())
+#Get the word index for each of the word in the review
+X_train = t.texts_to_sequences(X_train.tolist())
+X_test = t.texts_to_sequences(X_test.tolist())
+
+#3.Pad sequences to make each review size equal Get the word index for each of the word in the review
+from tensorflow.python.keras.preprocessing import sequence
+max_review_length = 1000   #Each review size
+X_train = sequence.pad_sequences(X_train,maxlen=max_review_length,padding='post')
+X_test = sequence.pad_sequences(X_test, maxlen=max_review_length, padding='post') 
+
+#4.Load the gensim model
+import gensim
+word2vec = gensim.models.Word2Vec.load('word2vec movie-50')
+#Embedding Length
+embedding_vector_length = word2vec.wv.vectors.shape[1]
+
+#5.Build Matrix for current data
+#Initialize embedding matrix to all zeros
+embedding_matrix = np.zeros((top_words + 1, # Vocablury size + 1,, we add 1 to vocab size for padding
+                             embedding_vector_length))
+
+#Steps for populating embedding matrix
+
+#a. Check each word in tokenizer vocablury to see if it exist in pre-trained
+# word2vec model.
+#b. If found, update embedding matrix with embeddings for the word 
+# from word2vec model
+
+for word, i in sorted(t.word_index.items(),key=lambda x:x[1]):
+    if i > top_words:
+        break
+    if word in word2vec.wv.vocab:
+        embedding_vector = word2vec.wv[word]
+        embedding_matrix[i] = embedding_vector
+        
+##6. Build the Graph
+from tensorflow.python.keras.models import Sequential
+from tensorflow.python.keras.layers import Dropout, Dense, Embedding, Flatten
+
+#Build a sequential model
+model1 = Sequential()
+
+#Add an embedding layer
+model1.add(Embedding(top_words + 1,
+                    embedding_vector_length,
+                    input_length=max_review_length,
+                    weights=[embedding_matrix],                                    # Pre-trained embedding
+                    trainable=False)                                               # We do not want to change embedding
+         )
+#Output from Embedding is 3 dimension 
+#- batch_size x max_review_length x embedding_vector_length. 
+#We need to flatten the output for Dense layer
+
+#Flatten embedding layer output and flatten layers
+model1.add(Flatten())                                                             # Flatten enables us to bring down the dimension of the prepared data
+model1.add(Dense(200,activation='relu'))                                          # Dense layer is for fully connected layer
+model1.add(Dense(100,activation='relu'))
+model1.add(Dropout(0.5))                                                          # Dropout is required to avoid overfiting & make the model generalize
+model1.add(Dense(60,activation='relu'))
+model1.add(Dropout(0.4))
+model1.add(Dense(30,activation='relu'))
+model1.add(Dropout(0.3))
+model1.add(Dense(1,activation='sigmoid'))                                         # We've used sigmoid because output variable is binary
+
+model1.compile(optimizer='adam',
+              loss='binary_crossentropy',
+              metrics=['accuracy'])
+              
+#Step 7: Execute the Graph
+model1.fit(X_train,y_train,
+          epochs=20,
+          batch_size=100,          
+          validation_data=(X_test, y_test))

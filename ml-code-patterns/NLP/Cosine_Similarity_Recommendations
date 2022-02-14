@@ -1,0 +1,37 @@
+import numpy as np
+import pandas as pd
+
+from sklearn.feature_extraction.text import TfidfVectorizer
+df_desc = original_df['textdata'] #textdata contains the description text in the dataframe
+# Instantiate a TfidfVectorizer object
+vectorizer = TfidfVectorizer()
+# It fits the data and transform it as a vector
+X = vectorizer.fit_transform(df_desc)
+# Convert the X as transposed matrix
+X = X.T.toarray()
+# Create a DataFrame and set the vocabulary as the index
+df = pd.DataFrame(X, index=vectorizer.get_feature_names())
+
+def get_similar_articles(q, df):   #q is the input text sample and the method returns the samples that are most similar to this
+  recom_list = []
+  print("query:", q)
+  # Convert the query become a vector
+  q = [q]
+  q_vec = vectorizer.transform(q).toarray().reshape(df.shape[0],)
+  sim = {}
+  # Calculate the similarity
+  for i in range(10):
+    sim[i] = np.dot(df.loc[:, i].values, q_vec) / np.linalg.norm(df.loc[:, i]) * np.linalg.norm(q_vec)
+  
+  # Sort the values 
+  sim_sorted = sorted(sim.items(), key=lambda x: x[1], reverse=True)
+  # Print the articles and their similarity values
+  for k, v in sim_sorted:
+    if v != 0.0:
+      print("Cosine Similarities:", v)
+      print ("Recommendation",k)
+      print(original_df.iloc[k]['name'])
+      recom_desc = original_df.iloc[k]['name'] #name column contains the identifier of the text review. Like, the name of the product whose review you provided as input.
+      recom_list = recom_list + [recom_desc]
+      print()
+  return recom_list

@@ -1,0 +1,18 @@
+import pandas as pd
+titanic = pd.read_csv("data/titanic.csv")
+
+#Make all name characters lowercase.
+titanic["Name"].str.lower()
+
+#Create a new column Surname that contains the surname of the passengers by extracting the part before the comma.
+titanic["Surname"] = titanic["Name"].str.split(",").str.get(0)
+
+#Extract the passenger data about the countesses on board of the Titanic.
+titanic[titanic["Name"].str.contains("Countess")]
+
+#Which passenger of the Titanic has the longest name?
+titanic.loc[titanic["Name"].str.len().idxmax(), "Name"]
+
+#In the “Sex” column, replace values of “male” by “M” and values of “female” by “F”.
+titanic["Sex_short"] = titanic["Sex"].replace({"male": "M", "female": "F"})
+

@@ -1,0 +1,14 @@
+from nltk.tokenize import sent_tokenize, word_tokenize
+from nltk.stem import PorterStemmer
+
+porter=PorterStemmer()
+
+def stemSentence(sentence):  #sentence is the input - review/piece of text in corpus
+    token_words=word_tokenize(sentence)
+    stem_sentence=[]
+    for word in token_words:
+        stem_sentence.append(porter.stem(word))
+        stem_sentence.append(" ")
+    return "".join(stem_sentence)
+    
+ df['stem_sentence'] = df['original_sentence'].apply(stemSentence) #stem_sentence column will contain the transformed output

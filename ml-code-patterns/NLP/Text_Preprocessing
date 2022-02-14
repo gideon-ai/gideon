@@ -1,0 +1,11 @@
+import string
+import re
+def text_preprocessing(text):       #'text' is a review/sentence 
+    text = str(text).lower()        #Converts text to lowercase
+    text = re.sub('\[.*?\]', '', text) #Removes question marks 
+    text = re.sub('https?://\S+|www\.\S+', '', text) #Removes the https and www tags
+    text = re.sub('<.*?>+', '', text) #Removes tags 
+    text = re.sub('[%s]' % re.escape(string.punctuation), '', text) #Remove punctuation
+    text = re.sub('\n', '', text) #Removes new line characters
+    text = re.sub('\w*\d\w*', '', text) #Drop Alphanumeric characters
+    return text

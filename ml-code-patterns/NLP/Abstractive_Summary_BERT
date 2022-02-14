@@ -1,0 +1,36 @@
+!pip install transformers==2.8.0
+!pip install torch==1.4.0
+import pandas as pd
+desc = df['Description'] #df is the dataframe that contains the input text. Preferably, articles containing more than 300 words.
+
+import torch
+import json 
+from transformers import T5Tokenizer, T5ForConditionalGeneration, T5Config
+
+model = T5ForConditionalGeneration.from_pretrained('t5-small')
+tokenizer = T5Tokenizer.from_pretrained('t5-small')
+device = torch.device('cpu')
+summ = []
+for i in range(1,len(desc)):
+
+  text = desc[i]
+  preprocess_text = text.strip().replace("\n","")
+  t5_prepared_Text = "summarize: "+preprocess_text
+  print ("original text preprocessed: \n", preprocess_text)
+
+  tokenized_text = tokenizer.encode(t5_prepared_Text, return_tensors="pt").to(device)
+
+
+# summmarize 
+  summary_ids = model.generate(tokenized_text,
+                                    num_beams=4,
+                                    no_repeat_ngram_size=2,
+                                    min_length=20,
+                                    max_length=40,
+                                    early_stopping=True)
+
+  output = tokenizer.decode(summary_ids[0], skip_special_tokens=True)
+  summ.append(output)
+  print ("\n\nSummarized text: \n",output)
+cols = ['Summarized_Output']
+result = pd.DataFrame(summ, columns=cols)
