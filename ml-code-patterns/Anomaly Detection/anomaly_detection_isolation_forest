@@ -1,0 +1,19 @@
+import numpy as np
+import pandas as pd
+import seaborn as sns
+from sklearn.ensemble import IsolationForest
+import matplotlib.pyplot as plt
+
+max_features=3.0
+n_estimators=50
+max_samples='auto'
+contamination=float(0.2)
+forest_model=IsolationForest(max_features = max_features, n_estimators=n_estimators, max_samples=max_samples, contamination=contamination)
+forest_model.fit(df[['Feature1','Feature2','Feature3]])
+
+#Now let’s find the value of scores and that of the anomaly column. Bypassing the egg weight as a parameter to decision_function() we can find the values of the scores column.
+#Similarly, we can find the values of the anomaly column bypassing the egg weight as a parameter to predict() the function of the trained model.
+df['scores']=forest_model.decision_function(df[['Feature1','Feature2','Feature3']])
+df['anomaly_Value']=forest_model.predict(df[['Feature1','Feature2','Feature3']])
+
+#Anomaly column values would be -1 and the corresponding scores will be negative for anomalies in the dataset.

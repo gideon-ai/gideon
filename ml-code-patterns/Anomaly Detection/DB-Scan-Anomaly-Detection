@@ -1,0 +1,20 @@
+#Choose the Preprocessing technique based on your data distribution. 
+from sklearn.preprocessing import MinMaxScaler
+scaler = MinMaxScaler() 
+df_scld = scaler.fit_transform(df)
+df_final = pd.DataFrame(df_scld, columns = df.columns)
+
+#Apply the DBSCAN algorithm
+from sklearn.cluster import DBSCAN
+outlier_detection = DBSCAN(
+ eps = .2, 
+ metric=”euclidean”, 
+ min_samples = 5,
+ n_jobs = -1)
+clusters = outlier_detection.fit_predict(df_final)  #DBSCAN will output an array of -1’s and 0’s, where -1 indicates an outlier.
+
+#Visualize the outliers
+from matplotlib import cm
+cmap = cm.get_cmap(‘Set1’)
+num.plot.scatter(x=’Column1’,y=’Column2’, c=clusters, cmap=cmap,
+ colorbar = False)

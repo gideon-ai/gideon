@@ -1,0 +1,11 @@
+#Warning: You should use this method only if the dataset is following a normal distribution across multiple columns
+import pandas as pd
+#Step1: Use Z-score function defined in scipy library to calculate the Z-scores for all the samples
+z = np.abs(stats.zscore(df))
+print(z)
+
+##Step2: Remove the outliers using the z-score
+df_z = df[(z < 2).all(axis=1)] #Z-score 2 is chosen here because we want to remove values which are in the top 5% of values. 
+
+print("The no. of rows before outlier filtering was: ", df.shape)
+print("The no. of rows after outlier filtering is: ", df_z.shape)

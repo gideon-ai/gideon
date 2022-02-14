@@ -1,0 +1,11 @@
+from sklearn import svm
+clf=svm.OneClassSVM(nu=.2,kernel=’rbf’,gamma=.001)
+clf.fit(df)
+y_pred=clf.predict(df)
+
+#Visualize the outliers
+from matplotlib import cm
+cmap = cm.get_cmap(‘Set1’)
+num.plot.scatter(x=’Column1’,y=’Column2’, c=y_pred, cmap=cmap,
+ colorbar = False)
+plt.title(‘One-Class SVM — Anomalies’);

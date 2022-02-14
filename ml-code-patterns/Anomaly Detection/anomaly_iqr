@@ -1,0 +1,14 @@
+import pandas as pd
+#Step1: Calculate the IQR
+Q1 = df.quantile(0.25) #df is the dataframe that contains the data
+Q3 = df.quantile(0.75)
+IQR = Q3 - Q1
+
+#Step 2: Remove the outliers
+
+df_out = df[~((df < (Q1 - 1.5 * IQR)) |df > (Q3 + 1.5 * IQR))).any(axis=1)] 
+
+print("The no. of rows before outlier filtering was: ", df.shape)
+print("The no. of rows after outlier filtering is: ", df_out.shape)
+
+#If the no.of outliers is significantly higher, then replace 1.5 with a higher value in the above code.

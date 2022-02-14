@@ -1,0 +1,16 @@
+from sklearn.covariance import EllipticEnvelope
+clf = EllipticEnvelope(contamination=.1,random_state=0) #Use the contamination hyperparameter to specify the percentage of observations the algorithm will assign as outliers.
+clf.fit(df)
+ee_scores = pd.Series(clf.decision_function(df)) 
+ee_predict = clf.predict(df)
+
+#ee_scores contains fitted densities. ee_predict contains labels, where -1 indicates an outlier and 1 does not. Labels are calculated based on clf.threshold_ and ee_scores.
+#Visualize the results
+import matplotlib.pyplot as plt
+%matplotlib inline
+cmap=np.array(['white','red'])
+plt.scatter(df['Column1'],df['Column2'],c='white',s=20,edgecolor='k')
+plt.scatter(ee_anomalies.iloc[:,1],ee_anomalies.iloc[:,2],c='red')#,marker='x',s=100)
+plt.title('Elliptic Envelope - Anomalies')
+plt.xlabel('Column1')
+plt.ylabel('Column2')

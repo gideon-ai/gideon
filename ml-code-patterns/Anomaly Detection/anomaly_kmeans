@@ -1,0 +1,26 @@
+from sklearn.cluster import KMeans
+import matplotlib.pyplot as plt
+from sklearn.preprocessing import scale
+
+x = df['target_column'] #This is the column on which we are going to run the clustering. 
+x = x.reshape(x.shape[0], 1) #If you have multiple columns, then replace the value '1' with the subsequent no.of columns
+x = scale(x)
+
+#Next, we'll define the model, fit the model on y data, and find out the center. Then, we'll calculate the distances of each sample.
+
+kmeans = KMeans(n_clusters = 1).fit(x)
+print(kmeans)
+
+center = kmeans.cluster_centers_
+print(center)
+
+distance = sqrt((x - center)**2)
+order_index = argsort(distance, axis = 0)
+indexes = order_index[-10:]    # We are going to find the top 10 datapoints which are significantly far away from the cluster center
+values = x[indexes]
+
+#Finally, we'll visualize the results in a plot by highlighting the anomalies with a color.
+x_ax = range(x.shape[0])
+plt.plot(x_ax, x)
+plt.scatter(indexes,values, color='r')
+plt.show()
