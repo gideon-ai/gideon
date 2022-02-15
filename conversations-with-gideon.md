@@ -1,4 +1,5 @@
-## This file contains the list of conversations that Gideon can handle at this point of time. Feel free to add more conversations and coding patterns.
+## Conversations with Gideon  
+### This file contains the list of conversations that Gideon can handle at this point of time. Feel free to add more conversations and coding patterns.
 
 Conversation 1:  
 
