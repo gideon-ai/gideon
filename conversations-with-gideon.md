@@ -18,7 +18,7 @@ Step 4: Define weights to the extracted keywords and calculate the score of the 
 
 Conversation 3: Video Summarizer  
 
-User: "Can you help me with the video summary of a webinar?"
-Gideon: Sure. Please provide the link
-User: Here you go - https://www.youtube.com/watch?v=i6XsRVcNThE
-Gideon: Great. I will mail you the summary once the video summary is ready.
+User: "Can you help me with the video summary of a webinar?"  
+Gideon: Sure. Please provide the link  
+User: Here you go - https://www.youtube.com/watch?v=i6XsRVcNThE  
+Gideon: Great. I will mail you the summary once the video summary is ready.  
