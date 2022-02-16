@@ -1,0 +1,60 @@
+def audio_generate(text_dic,name,voice,gender):  #Input should be a dictionary with the Page No as key and page text as the value
+    client = texttospeech.TextToSpeechClient()
+
+    # Set the text input to be synthesized
+    name=name
+    out_text = []
+    #print ("Text Dic",text_dic)
+    for key,val in text_dic.items():
+        out_text.append(val)
+    out_text_str = ' '.join(out_text)
+    #print ("Out Text",out_text_str)
+    synthesis_input = texttospeech.SynthesisInput(text=out_text_str)
+
+    # Build the voice request, select the language code ("en-US") and the ssml
+    # voice gender ("neutral")
+    if gender == 'MALE':
+        ssml_gender = texttospeech.SsmlVoiceGender.MALE
+    else:
+        ssml_gender = texttospeech.SsmlVoiceGender.FEMALE
+    voice = texttospeech.VoiceSelectionParams(language_code=voice, ssml_gender=ssml_gender)
+    #voice = texttospeech.VoiceSelectionParams(language_code="hi-IN", ssml_gender=texttospeech.SsmlVoiceGender.MALE)
+    
+    # Select the type of audio file you want returned
+    print ("Voice",voice)
+    audio_config = texttospeech.AudioConfig(audio_encoding=texttospeech.AudioEncoding.MP3)
+    
+    # Perform the text-to-speech request on the text input with the selected
+    # voice parameters and audio file type
+    #response = client.synthesize_speech(input=synthesis_input, voice=voice, audio_config=audio_config)
+    #print (response)
+    
+    blocks = round(len(out_text_str)/5000)
+    audio_content = []
+    print (blocks)
+    for i in range(blocks):
+       #print (5000*(i+1))
+        print (i)
+        int_text = out_text_str[i*5000:5000*(i+1)]
+        print (len(int_text))
+        synthesis_input = texttospeech.SynthesisInput(text=int_text)
+        response = client.synthesize_speech(input=synthesis_input, voice=voice, audio_config=audio_config)
+        audio_content.append(response.audio_content)
+        #print (audio_content)
+    rand_out = random.randint(0,999999)
+    filename = "output" + str(rand_out) + ".mp3"
+    print (filename)
+    m = b' '.join(audio_content)
+    # The response's audio_content is binary.
+    with open(filename, "wb") as out:
+        # Write the response to the output file.
+        out.write(m)
+        print('Audio content written to file "output.mp3"')
+    client = storage.Client.from_service_account_json(json_credentials_path='magneto.json')
+    bucket = client.get_bucket('bucket') #Name of the Google Cloud Storage bucket
+    object_name_in_gcs_bucket = bucket.blob(name)
+
+# Name of the object in local file system
+    print ("About to upload the file")
+    object_name_in_gcs_bucket.upload_from_filename(filename)      
+    return filename
