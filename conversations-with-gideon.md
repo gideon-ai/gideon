@@ -11,10 +11,10 @@ Conversation 2: Resume Scorecard
 User: "How to build a resume scorecard?"  
 Gideon: Here are the steps to build a resume scorecard:  
 
-Step 1: Extract the text from a pdf using PyPDF package - [pyPDF code pattern](ml-code-patterns/model%20training/customer_segmentation_plotly)   
-Step 2: Clean the textual data by removing stop words - [Stopword Removal](ml-code-patterns/model%20training/customer_segmentation_plotly)  
-Step 3: Setup a NLP Pipeline for keyword extraction - [Keyword Extraction](ml-code-patterns/model%20training/customer_segmentation_plotly)    
-Step 4: Define weights to the extracted keywords and calculate the score of the resume  
+Step 1: Extract the text from a pdf using PyPDF package - [pyPDF code pattern](ml-code-patterns/NLP/text_from_pdf)   
+Step 2: Clean the textual data by removing stop words - [Stopword Removal](ml-code-patterns/NLP/stopword_removal)  
+Step 3: Setup a NLP Pipeline for keyword extraction - [Keyword Extraction](ml-code-patterns/NLP/NER_Spacy)    
+Step 4: Define weights to the extracted keywords and calculate the score of the [resume](ml-code-patterns/NLP/keywords_resume)      
 
 Converstation 3: Dataset Recommendation Engine  
 
