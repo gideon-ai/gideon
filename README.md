@@ -6,5 +6,7 @@
 - 💞️ I’m looking to collaborate with people interested in building AI products that solve real-world problems. Here is how you can [contribute](How-can-I-contribute.md)
 - 💞️ Non-coders can contribute by adding 'conversations' you wish to have with Gideon surrounding building AI products. You can add your own dream conversation with Gideon to this [file](conversations-with-gideon.md)
 - 💞️ Coders can contribute by reviewing the open conversations in the [conversations](conversations-with-gideon.md) file and add a coding pattern [here](ml-code-patterns)
-- 📫 You can reach me at gideon@feedbackfirst.app
+- 📫 You can reach me at gideon@feedbackfirst.app  
+- 🌱 The code recommendation engine is now live at https://aiquotient.app   
+- 💞️ Here is a link to the video that explains how [AI Products can be built using Gideon](https://www.youtube.com/watch?v=2nwKA2yR7fg&ab_channel=AIQuotient)
 
