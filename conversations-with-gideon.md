@@ -51,16 +51,21 @@ Gideon: Very good. Would you prefer Extractive Summarization or Abstractive Summ
 User: Abstractive Summarization please    
 Gideon: Here you go. [Abstractive Summarization using BERT](ml-code-patterns/NLP/Abstractive_Summary_BERT) 
 
-User: 
+`Conversation 7: Anomaly Detector `  
 
-Conversation 7: Product Review Summarizer  
+User: "I want to detect anomalies in my dataset. What are the possible approaches?"  
+Gideon: Here are 4 different approaches you can explore:  
 
-Conversation 8: Email Analyzer    
+1.If your data is following a normal distribution, go for [Anomaly Detection using Z-score](ml-code-patterns/Anomaly%20Detection/anomaly_z-score)  
+2.If your data can be linearly separated, go for [Anomaly Detection using SVM](ml-code-patterns/Anomaly%20Detection/anomaly_one_class_svm)  
+3.If you have no idea about your underlying data distribution, go for [Anomaly Detection using Clustering](ml-code-patterns/Anomaly%20Detection/anomaly_kmeans)  
 
-User: "I have a bunch of emails that I want to be analyzed. Can you help?"  
-Gideon: Sure. Follow this [tutorial](https://youtube.com) and give me the link to the zip file containing the emails.  
-User: Here you go - https://youtube.com  
-Gideon: Great. I will mail you the report soon after the processing is complete.  
+`Conversation 8: Dataset Recommender`    
+
+User: "I am looking for reference datasets for a problem I am working on. Is there a way I can get that info?"  
+Gideon: What is the problem you are trying to solve?    
+User: "It is a problem in the Finance domain"  
+Gideon: Here is a code repository that can help you build your own [Dataset Recommender](https://github.com/gideon-ai/Dataset-Recommendation-Engine)    
 
 Conversation 9: Video Summarizer  
 
