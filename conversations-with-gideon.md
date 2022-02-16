@@ -26,18 +26,14 @@ Conversation 6: Text-to-Image Generator
 
 Conversation 7: Product Review Summarizer  
 
-Conversation 8: Website Builder  
-
-Conversation 9: CRM Builder  
-
-Conversation 10: Email Analyzer    
+Conversation 8: Email Analyzer    
 
 User: "I have a bunch of emails that I want to be analyzed. Can you help?"  
 Gideon: Sure. Follow this [tutorial](https://youtube.com) and give me the link to the zip file containing the emails.  
 User: Here you go - https://youtube.com  
 Gideon: Great. I will mail you the report soon after the processing is complete.  
 
-Conversation 11: Video Summarizer  
+Conversation 9: Video Summarizer  
 
 User: "Can you help me with the video summary of a webinar?"  
 Gideon: Sure. Please provide the link  
