@@ -1,7 +1,7 @@
 ## Conversations with Gideon  
 ### This file contains the list of conversations that will help Gideon build AI products. Feel free to add more conversations and coding patterns.
 
-<b> Conversation 1: Customer Segmentation</b>   
+`Conversation 1: Customer Segmentation`   
 
 User: "How can I perform Customer Segmentation?"  
 Gideon: Here is a coding pattern that can help you [build a K-Means Clustering model](ml-code-patterns/model%20training/customer_segmentation_plotly) 
