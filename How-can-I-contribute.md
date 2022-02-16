@@ -22,7 +22,7 @@ The following is a set of guidelines for contributing to Gideon, which is runnin
 
 ## Code of Conduct
 
-This project and everyone participating in it is governed by the [Gideon Code of Conduct](CODE_OF_CONDUCT.md). By participating, you are expected to uphold this code. Please report unacceptable behavior to [gideon@feedbackfirst.com](mailto:gideon@feedbackfirst.app).
+This project and everyone participating in it is governed by the [Gideon Code of Conduct](CODE_OF_CONDUCT.md). By participating, you are expected to uphold this code. Please report unacceptable behavior to [gideon@feedbackfirst.app](mailto:gideon@feedbackfirst.app).
 
 ## I don't want to read this whole thing I just have a question!!!
 
