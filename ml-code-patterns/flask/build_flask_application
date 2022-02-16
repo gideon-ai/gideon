@@ -1,0 +1,23 @@
+Step 1: Setup the folder structure with all the static files (images, css, js) in the 'static' folder and html files in the 'templates' folder.
+Step 2: Here is the coding pattern to build a Flask application. This should be part of .py or .ipynb file
+
+from flask import Flask, render_template, session, request,send_from_directory,redirect,url_for, make_response, jsonify
+app = Flask(__name__)
+@app.route('/form_details', methods=['POST','GET'])
+def form_processing():
+    return render_template('form1.html')  #form1.html should be in the templates folder
+@app.route('/form_processing', methods=['POST','GET'])
+def form_details():
+    topic = request.args.get('topic')   #topic, area, link, content, company are the names of the fields in the form submitted. 
+    area = request.args.get('area')
+    link = request.args.get('link')
+    content = request.args.get('content')
+    company = request.args.get('company')
+    process_url(topic, area, link, content, df_content_final, company)
+    print (topic)
+    return render_template("form_submission.html") #This can be the html page that shows successful submission of form
+
+if __name__ == '__main__':
+    app.run(port=7000)
+    
+Step 3: The app is now going to be available on the url http://localhost:7000
