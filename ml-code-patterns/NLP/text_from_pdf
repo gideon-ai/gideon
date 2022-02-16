@@ -1,0 +1,69 @@
+#Approach 1 - Using PyPDF2
+
+import PyPDF2
+ 
+# creating a pdf file object
+pdfFileObj = open('resume.pdf', 'rb')
+ 
+# creating a pdf reader object
+pdfReader = PyPDF2.PdfFileReader(pdfFileObj)
+ 
+# printing number of pages in pdf file
+print(pdfReader.numPages)
+ 
+# creating a page object
+pageObj = pdfReader.getPage(0)
+ 
+# extracting text from page
+#print(pageObj.extractText())
+text = pageObj.extractText()
+print (text)
+
+# closing the pdf file object
+pdfFileObj.close()
+
+#Approach 2: Using PDFMiner
+#pip install pdfminer.six
+
+import os
+import sys
+import re
+from pdfminer.pdfinterp import PDFResourceManager, PDFPageInterpreter
+from pdfminer.converter import TextConverter
+from pdfminer.layout import LAParams
+from pdfminer.pdfpage import PDFPage
+from io import BytesIO
+
+
+def clear_text():
+   open("Output.txt", "w").close()
+   
+#writelines function
+def writelines(self, lines):
+    self._checkClosed()
+    for line in lines:
+       self.write(line)
+
+#PDF to text Function. 
+def pdf_to_text(path):
+    manager = PDFResourceManager()
+    retstr = BytesIO()
+    layout = LAParams(all_texts=True)
+    device = TextConverter(manager, retstr, laparams=layout)
+    filepath = open(path, 'rb')
+    interpreter = PDFPageInterpreter(manager, device)
+
+    for page in PDFPage.get_pages(filepath, check_extractable=True):
+        interpreter.process_page(page)
+
+    text = retstr.getvalue()
+    filepath.close()
+    device.close()
+    retstr.close()
+    return text
+
+if __name__ == "__main__":
+    clear_text()
+    text_output = pdf_to_text(('resume.pdf')) #Extract text with PDF_to_text Function call
+    text1_output = text_output.decode("utf-8")     #Decode result from bytes to text
+    print(text1_output)
