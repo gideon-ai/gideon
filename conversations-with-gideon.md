@@ -34,14 +34,24 @@ Step 7: Here is the code to convert the recognized text [above](ml-code-patterns
 User: "I want to build a NLP-powered search engine for an internal Knowledge Management portal. Can you help?"  
 Gideon: Here you go. [Build a search engine using Transformers](ml-code-patterns/model%20training/qa_system_transformers)  
 
-`Conversation 5: Product Review Summarizer`  
+ `Conversation 5: Text Recommendation Engine`  
+ 
+ User: "I have a bunch of articles. I want to build a Recommendation engine akin to Netflix for these articles. Any ideas?"  
+ Gideon: Here are the steps you can follow for building a text recommendation engine:  
+ 
+ Step 1: Scrape the text from the articles. Here is a [code recommendation](ml-code-patterns/NLP/scrape_text_from_external_articles)  
+ Step 2: Clean the text using this [code recommendation](ml-code-patterns/NLP/Text_Preprocessing)  
+ Step 3: Generate the embeddings for the cleaned text using [Word2Vec](ml-code-patterns/NLP/Word2Vec-Gensim)  
+ Step 4: Start finding the most similar articles to a given article using the [cosine similarity code recommendation engine](ml-code-patterns/NLP/Cosine_Similarity_Recommendations)
 
-User: "I have a bunch of product reviews. I wish to summarize the reviews using NLP."
-Gideon: Very good. Would you prefer Extractive Summarization or Abstractive Summarization?
-User: Abstractive Summarization please  
-Gideon: Here you go. [Abstractive Summarization using BERT](ml-code-patterns/NLP/Abstractive_Summary_BERT)
+`Conversation 6: Product Review Summarizer`  
 
-Conversation 6: Text-to-Image Generator  
+User: "I have a bunch of product reviews. I wish to summarize the reviews using NLP."  
+Gideon: Very good. Would you prefer Extractive Summarization or Abstractive Summarization?  
+User: Abstractive Summarization please    
+Gideon: Here you go. [Abstractive Summarization using BERT](ml-code-patterns/NLP/Abstractive_Summary_BERT) 
+
+User: 
 
 Conversation 7: Product Review Summarizer  
 
