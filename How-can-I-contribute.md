@@ -47,16 +47,11 @@ Imagine you are speaking with a coding assistant that can help you build anythin
 
 Gideon needs sample conversations to get trained. If you are a Product Manager or a Data Scientist who wishes to build an AI Product from scratch, think of how the conversation with Gideon might end up.
 
-
-
-What kind of ML functionality do you want to build? Is it building a Transformer model? Is it visualizing a continuous variable?
-
-Submit your search queries and Gideon will learn the coding pattern necessary to answer your query
+- 💞️ Non-coders can contribute by adding 'conversations' you wish to have with Gideon surrounding building AI products. You can add your own dream conversation with Gideon to this [file](conversations-with-gideon.md)  
 
 ### Contribute Coding Patterns
 
-Do you have a popular coding pattern that solves some of the most common needs of a Data Scientist? You can share the coding pattern and it will help Gideon answer some of the most popular problems faced by a Data Scientist
+Do you have a popular coding pattern that solves some of the most common needs of a Data Scientist? You can share the coding pattern and it will help Gideon answer some of the most popular problems faced while building an AI Product.  
 
-### Your First Contribution
-
+- 💞️ Coders can contribute by reviewing the open conversations in the [conversations](conversations-with-gideon.md) file and add a coding pattern [here](ml-code-patterns)  
 
