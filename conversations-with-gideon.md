@@ -67,11 +67,19 @@ Gideon: What is the problem you are trying to solve?
 User: "It is a problem in the Finance domain"  
 Gideon: Here is a code repository that can help you build your own [Dataset Recommender](https://github.com/gideon-ai/Dataset-Recommendation-Engine)    
 
-Conversation 9: Video Summarizer  
+`Conversation 9: AI Product Deployer`
 
-User: "Can you help me with the video summary of a webinar?"  
-Gideon: Sure. Please provide the link  
-User: Here you go - https://www.youtube.com/watch?v=i6XsRVcNThE  
-Gideon: Great. I will mail you the summary once the video summary is ready.
+User: "I have a Deep Learning model that I wish to integrate with a bootstrap application and deploy in the cloud. What are the steps?"  
+Gideon: Here is the process:  
 
-Conversation 10: Audiobook Generator
+Step 1: Choose a Bootstrap template from the options available [here](https://www.creative-tim.com/product/argon-design-system)
+Step 2: Build a Flask application using the code pattern available [here](ml-code-patterns/flask/build_flask_application)  
+Step 3: Create a project in Google Cloud  
+Step 4: Create a service account with 'Owner' privileges and store the credentials in a 'credentials.json' file     
+Step 5: Create a VM in the Google Cloud Console    
+Step 6: Deploy the Flask application in Google Cloud by following the steps in this [coding pattern](ml-code-patterns/flask/flask_google_cloud) 
+
+`Conversation 10: CCTV Analyzer`  
+
+User: "I want to identify objects in a CCTV Video repository. Where should I start?"  
+Gideon: YOLO library is a good place to start. Here is a [code pattern](ml-code-patterns/model%20training/obj_detection_video_stream_yolo) that can detect objects in a video stream.  
