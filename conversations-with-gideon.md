@@ -83,3 +83,7 @@ Step 6: Deploy the Flask application in Google Cloud by following the steps in t
 
 User: "I want to identify objects in a CCTV Video repository. Where should I start?"  
 Gideon: YOLO library is a good place to start. Here is a [code pattern](ml-code-patterns/model%20training/obj_detection_video_stream_yolo) that can detect objects in a video stream.  
+
+`Conversation 11: Book Recommendation Engine`
+User: "I have a list of books information with me. I wish to build my own book recommender."
+Gideon: 
