@@ -1,5 +1,5 @@
 ## Conversations with Gideon  
-### This file contains the list of conversations that will help Gideon build AI products. Feel free to add more conversations and coding patterns.
+### This file contains the list of conversations that will help Gideon build AI products. Feel free to add more conversations and coding patterns here.
 
 `Conversation 1: Customer Segmentation`   
 
