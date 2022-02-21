@@ -16,9 +16,7 @@ The following is a set of guidelines for contributing to Gideon, which is runnin
 
 [How Can I Contribute?](#how-can-i-contribute)
   * [Conversations with Gideon](#conversations-with-gideon)
-  * [Suggesting Enhancements](#suggesting-enhancements)
-  * [Your First Contribution](#your-first-contribution)
-  * [Pull Requests](#pull-requests)
+  * [Contribute Coding Patterns](#contribute-coding-patterns)
 
 ## Code of Conduct
 
