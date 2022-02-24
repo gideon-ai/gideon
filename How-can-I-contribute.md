@@ -46,6 +46,7 @@ Imagine you are speaking with a coding assistant that can help you build anythin
 Gideon needs sample conversations to get trained. If you are a Product Manager or a Data Scientist who wishes to build an AI Product from scratch, think of how the conversation with Gideon might end up.
 
 - 💞️ Non-coders can contribute by adding 'conversations' you wish to have with Gideon surrounding building AI products. You can add your own dream conversation with Gideon to this [file](conversations-with-gideon.md)  
+- Here is a [video](https://youtu.be/0lkmsBwlpeQ) that explains how you can contribute to the conversations
 
 ### Contribute Coding Patterns
 
