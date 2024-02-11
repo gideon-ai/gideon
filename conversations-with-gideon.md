@@ -88,3 +88,36 @@ Gideon: YOLO library is a good place to start. Here is a [code pattern](ml-code-
 
 User: "I want to generate images from text descriptions. How can I get started?"
 
+`Conversation 12: Algorithm Selection`
+
+User:  "I'm working on a project to predict housing prices based on various features like square footage, number of bedrooms,
+location, etc. What machine learning algorithm would you recommend for this task?"
+
+Gideon: For predicting housing prices based on features like square footage, number of bedrooms, and location, a regression algorithm would be most suitable. 
+Linear regression could be a good starting point, especially if you have a relatively small dataset and linear relationships between features and the target variable.
+However, if the relationships are more complex, you might want to consider more advanced regression techniques 
+like polynomial regression or even ensemble methods like random forests or gradient boosting.
+
+User: "Could you explain how they work and whether they'd be a good fit for our housing price prediction task?"
+
+Gideon: Decision trees are a popular machine learning algorithm used for both classification and regression tasks. They work by recursively partitioning the feature space into regions, 
+with each region associated with a predicted value (in regression) or a class label (in classification). Decision trees are intuitive to interpret and can 
+capture complex interactions between features. For your housing price prediction task, decision trees could be a good choice, 
+especially if you want to understand the factors driving the predictions in a transparent way. 
+If you're interested, I can also provide you with a code snippet for implementing decision tree regression in Python using Scikit-Learn.
+
+User: "That would be great!"
+
+Gideon: Here's a link to the code snippet: Decision Tree Regression with Scikit-Learn
+
+User: " How do we decide on the complexity of the tree? Should we worry about overfitting?"
+
+Gideon: Decision trees have parameters like maximum depth, minimum samples per leaf, and maximum number of leaf nodes that control their complexity. 
+A deeper tree might capture more details in the training data but could also lead to overfitting, especially if the dataset is small or noisy. 
+It's essential to tune these hyperparameters using techniques like cross-validation to find the right balance between model complexity and generalization performance. 
+If you're interested, I can also provide you with a code snippet for hyperparameter tuning with grid search in Python using Scikit-Learn.
+
+User: "Yes, please"
+
+Gideon: Here's a link to the code snippet: Hyperparameter Tuning with Grid Search
+
